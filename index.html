@@ -669,183 +669,107 @@ svg.leaflet-image-layer.leaflet-interactive path {
 		}
 	}
 
-:root {
-  --ink: #1a1714; --paper: #f7f4ef; --warm: #c8a96e;
-  --canal: #5b8fa8; --muted: #8a8178; --card-bg: #ffffff; --radius: 12px;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; }
-
-.hero { background: var(--ink); color: var(--paper); padding: 64px 40px 52px; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(91,143,168,0.2) 0%, transparent 70%); pointer-events: none; }
-.hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); margin-bottom: 18px; }
-.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 10px; }
-.hero h1 em { font-style: italic; color: var(--warm); }
-.hero-sub { font-size: 14px; color: rgba(247,244,239,0.55); margin-top: 14px; letter-spacing: 0.06em; }
-.hero-stats { display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap; }
-.stat { text-align: center; }
-.stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--warm); display: block; }
-.stat-label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(247,244,239,0.4); }
-
-.nav { background: var(--card-bg); border-bottom: 1px solid rgba(0,0,0,0.08); display: flex; justify-content: center; position: sticky; top: 0; z-index: 1000; }
-.nav-btn { padding: 15px 32px; border: none; background: none; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; text-transform: uppercase; }
-.nav-btn.active { color: var(--ink); border-bottom-color: var(--warm); }
-
-.section { display: none; }
-.section.active { display: block; }
-#map { height: 560px; width: 100%; }
-.custom-marker { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 5px rgba(0,0,0,0.35); }
-
-.timeline-wrap { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
-.section-heading { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; color: var(--muted); letter-spacing: 0.06em; margin-bottom: 40px; text-align: center; font-style: italic; }
-
-.day-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04); transition: box-shadow 0.2s, transform 0.15s; }
-.day-card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
-.day-card-header { display: grid; grid-template-columns: 200px 1fr; cursor: pointer; min-height: 160px; }
-.thumb-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #ccc; height: 160px; overflow: hidden; }
-.thumb-pair img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.thumb-single { height: 160px; overflow: hidden; }
-.thumb-single img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.thumb-empty { height: 160px; background: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; }
-.day-info { padding: 20px 24px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 5px; }
-.day-theme-tag { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; color: white; align-self: flex-start; }
-.day-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-.day-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 400; line-height: 1.2; }
-.day-summary { font-size: 13px; color: var(--muted); line-height: 1.65; }
-.day-meta { font-size: 11px; color: var(--canal); margin-top: 2px; }
-.expand-hint { position: absolute; bottom: 12px; right: 18px; font-size: 11px; color: var(--muted); }
-
-.day-stops { display: none; border-top: 1px solid rgba(0,0,0,0.06); padding: 4px 0 8px; }
-.day-stops.open { display: block; }
-
-/* Stop rows — individually expandable */
-.stop-row { border-bottom: 1px solid rgba(0,0,0,0.04); }
-.stop-row:last-child { border-bottom: none; }
-.stop-header { display: flex; align-items: center; gap: 12px; padding: 10px 24px; cursor: pointer; transition: background 0.15s; }
-.stop-header:hover { background: rgba(0,0,0,0.02); }
-.stop-time { font-size: 11px; font-weight: 500; color: var(--canal); white-space: nowrap; min-width: 40px; }
-.stop-location { font-size: 13px; flex: 1; }
-.stop-note { font-size: 12px; color: var(--muted); font-style: italic; }
-.stop-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
-.stop-chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; margin-left: 4px; }
-.stop-chevron.open { transform: rotate(180deg); }
-
-/* Stop detail panel */
-.stop-detail { display: none; padding: 0 24px 14px; }
-.stop-detail.open { display: block; }
-.stop-photo-strip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
-.stop-photo-strip img { height: 100px; width: 100px; object-fit: cover; border-radius: 6px; flex-shrink: 0; cursor: pointer; transition: opacity 0.15s; }
-.stop-photo-strip img:hover { opacity: 0.88; }
-.stop-no-photos { font-size: 12px; color: var(--muted); font-style: italic; }
-
-/* LIGHTBOX */
-.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; }
-.lightbox.open { display: flex; }
-.lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; }
-.lightbox-close { position: absolute; top: 20px; right: 28px; color: white; font-size: 32px; cursor: pointer; line-height: 1; opacity: 0.7; }
-.lightbox-close:hover { opacity: 1; }
-.lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; cursor: pointer; opacity: 0.6; padding: 20px; user-select: none; }
-.lightbox-nav:hover { opacity: 1; }
-.lightbox-prev { left: 8px; }
-.lightbox-next { right: 8px; }
-.lightbox-caption { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 0.06em; }
-
-.gallery-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
-.day-gallery-block { margin-bottom: 52px; }
-.day-gallery-label { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 14px; display: flex; align-items: center; gap: 14px; color: var(--ink); }
-.day-gallery-label::after { content: ''; flex: 1; height: 1px; background: rgba(0,0,0,0.08); }
-.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 6px; }
-.gallery-cell { aspect-ratio: 1; border-radius: 6px; overflow: hidden; cursor: pointer; }
-.gallery-cell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.2s; }
-.gallery-cell:hover img { transform: scale(1.04); }
-
-footer { text-align: center; padding: 32px; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; border-top: 1px solid rgba(0,0,0,0.06); }
-
-@media (max-width: 600px) {
-  .day-card-header { grid-template-columns: 120px 1fr; }
-  .thumb-pair, .thumb-single, .thumb-empty { height: 120px; }
-  .hero-stats { gap: 20px; }
-  .nav-btn { padding: 14px 16px; font-size: 11px; }
-}
-</style>
-</head>
-<body>
-
-<div class="hero">
-  <div class="hero-eyebrow">20th Anniversary &middot; June 2026</div>
-  <h1>Kyle &amp; Sarah<br>in <em>Venezia</em></h1>
-  <div class="hero-sub">June 18 &ndash; 25, 2026 &nbsp;&middot;&nbsp; Eight Days on the Islands</div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">8</span><span class="stat-label">Days in Venice</span></div>
-    <div class="stat"><span class="stat-num">180</span><span class="stat-label">Photos</span></div>
-    <div class="stat"><span class="stat-num">46</span><span class="stat-label">Stops</span></div>
-    <div class="stat"><span class="stat-num">20</span><span class="stat-label">Years Together</span></div>
-  </div>
-</div>
-
-<nav class="nav">
-  <button class="nav-btn active" onclick="showSection('map-section', this)">Map</button>
-  <button class="nav-btn" onclick="showSection('story-section', this)">Story</button>
-  <button class="nav-btn" onclick="showSection('gallery-section', this)">Gallery</button>
-  <button class="nav-btn" onclick="showSection('about-section', this)">About</button>
-</nav>
-
+:root { --ink:#1a1714;--paper:#f7f4ef;--warm:#c8a96e;--canal:#5b8fa8;--muted:#8a8178;--card-bg:#ffffff;--radius:12px; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-weight:300;min-height:100vh;}
+.hero{background:var(--ink);color:var(--paper);padding:64px 40px 52px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(91,143,168,0.2) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:18px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,6vw,4.2rem);font-weight:400;line-height:1.1;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:var(--warm);}
+.hero-sub{font-size:14px;color:rgba(247,244,239,0.55);margin-top:14px;letter-spacing:0.06em;}
+.hero-stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--warm);display:block;}
+.stat-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(247,244,239,0.4);}
+.nav{background:var(--card-bg);border-bottom:1px solid rgba(0,0,0,0.08);display:flex;justify-content:center;position:sticky;top:0;z-index:1000;}
+.nav-btn{padding:15px 28px;border:none;background:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;letter-spacing:0.1em;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;text-transform:uppercase;}
+.nav-btn.active{color:var(--ink);border-bottom-color:var(--warm);}
+.section{display:none;} .section.active{display:block;}
+#map{height:560px;width:100%;}
+.custom-marker{width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.35);}
+.timeline-wrap{max-width:860px;margin:0 auto;padding:48px 24px 80px;}
+.section-heading{font-family:'Playfair Display',serif;font-size:1rem;font-weight:400;color:var(--muted);letter-spacing:0.06em;margin-bottom:40px;text-align:center;font-style:italic;}
+.day-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06),0 4px 16px rgba(0,0,0,0.04);transition:box-shadow 0.2s,transform 0.15s;}
+.day-card:hover{box-shadow:0 4px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+.day-card-header{display:grid;grid-template-columns:200px 1fr;cursor:pointer;min-height:160px;}
+.thumb-pair{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#ccc;height:160px;overflow:hidden;}
+.thumb-pair img,.thumb-single img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-single{height:160px;overflow:hidden;}
+.thumb-empty{height:160px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:1.8rem;}
+.day-info{padding:20px 24px;position:relative;display:flex;flex-direction:column;justify-content:center;gap:5px;}
+.day-theme-tag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;color:white;align-self:flex-start;}
+.day-label{font-size:11px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+.day-title{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:400;line-height:1.2;}
+.day-summary{font-size:13px;color:var(--muted);line-height:1.65;}
+.day-meta{font-size:11px;color:var(--canal);margin-top:2px;}
+.expand-hint{position:absolute;bottom:12px;right:18px;font-size:11px;color:var(--muted);}
+.day-stops{display:none;border-top:1px solid rgba(0,0,0,0.06);padding:4px 0 8px;}
+.day-stops.open{display:block;}
+.stop-row{border-bottom:1px solid rgba(0,0,0,0.04);}
+.stop-row:last-child{border-bottom:none;}
+.stop-header{display:flex;align-items:center;gap:12px;padding:10px 24px;cursor:pointer;transition:background 0.15s;user-select:none;}
+.stop-header:hover{background:rgba(0,0,0,0.02);}
+.stop-time{font-size:11px;font-weight:500;color:var(--canal);white-space:nowrap;min-width:40px;}
+.stop-location{font-size:13px;flex:1;}
+.stop-note{font-size:12px;color:var(--muted);font-style:italic;}
+.stop-count{font-size:11px;color:var(--muted);white-space:nowrap;}
+.stop-chevron{font-size:10px;color:var(--muted);margin-left:4px;transition:transform 0.2s;display:inline-block;}
+.stop-chevron.open{transform:rotate(180deg);}
+.stop-detail{display:none;padding:0 24px 14px;}
+.stop-detail.open{display:block;}
+.stop-photo-strip{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;}
+.stop-photo-strip::-webkit-scrollbar{height:4px;}
+.stop-photo-strip::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.15);border-radius:2px;}
+.stop-photo-strip img{height:110px;width:110px;object-fit:cover;border-radius:6px;flex-shrink:0;cursor:pointer;transition:opacity 0.15s;}
+.stop-photo-strip img:hover{opacity:0.85;}
+.stop-no-photos{font-size:12px;color:var(--muted);font-style:italic;padding:4px 0;}
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px;}
+.lightbox-close{position:absolute;top:20px;right:28px;color:white;font-size:32px;cursor:pointer;line-height:1;opacity:0.7;}
+.lightbox-close:hover{opacity:1;}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);color:white;font-size:40px;cursor:pointer;opacity:0.6;padding:20px;user-select:none;}
+.lightbox-nav:hover{opacity:1;}
+.lightbox-prev{left:8px;} .lightbox-next{right:8px;}
+.lightbox-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:rgba(255,255,255,0.7);font-size:12px;letter-spacing:0.06em;}
+.gallery-wrap{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+.day-gallery-block{margin-bottom:52px;}
+.day-gallery-label{font-family:'Playfair Display',serif;font-size:1.05rem;margin-bottom:14px;display:flex;align-items:center;gap:14px;color:var(--ink);}
+.day-gallery-label::after{content:'';flex:1;height:1px;background:rgba(0,0,0,0.08);}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px;}
+.gallery-cell{aspect-ratio:1;border-radius:6px;overflow:hidden;cursor:pointer;}
+.gallery-cell img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.2s;}
+.gallery-cell:hover img{transform:scale(1.04);}
+footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-spacing:0.1em;border-top:1px solid rgba(0,0,0,0.06);}
+@media(max-width:600px){.day-card-header{grid-template-columns:120px 1fr;}.thumb-pair,.thumb-single,.thumb-empty{height:130px;}.hero-stats{gap:20px;}.nav-btn{padding:14px 12px;font-size:11px;}}
+</style></head><body>
+<div class="hero"><div class="hero-eyebrow">20th Anniversary &middot; June 2026</div><h1>Kyle &amp; Sarah<br>in <em>Venezia</em></h1><div class="hero-sub">June 18 &ndash; 25, 2026 &nbsp;&middot;&nbsp; Eight Days on the Islands</div><div class="hero-stats"><div class="stat"><span class="stat-num">8</span><span class="stat-label">Days in Venice</span></div><div class="stat"><span class="stat-num">180</span><span class="stat-label">Photos</span></div><div class="stat"><span class="stat-num">46</span><span class="stat-label">Stops</span></div><div class="stat"><span class="stat-num">20</span><span class="stat-label">Years Together</span></div></div></div>
+<nav class="nav"><button class="nav-btn active" onclick="showSection('map-section',this)">Map</button><button class="nav-btn" onclick="showSection('story-section',this)">Story</button><button class="nav-btn" onclick="showSection('gallery-section',this)">Gallery</button><button class="nav-btn" onclick="showSection('about-section',this)">About</button></nav>
 <div id="map-section" class="section active"><div id="map"></div></div>
-<div id="story-section" class="section">
-  <div class="timeline-wrap">
-    <p class="section-heading">The journey, day by day &mdash; tap any card to expand</p>
-    <div id="day-cards"></div>
-  </div>
+<div id="story-section" class="section"><div class="timeline-wrap"><p class="section-heading">The journey, day by day &mdash; tap a card to expand stops, tap a stop to see its photos</p><div id="day-cards"></div></div></div>
+<div id="gallery-section" class="section"><div class="gallery-wrap"><p class="section-heading">Memories, organized by day</p><div id="gallery-grid-wrap"></div></div></div>
+<div id="about-section" class="section"><div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
+<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.1</p>
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Map of every GPS stop, day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox.</p>
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">File structure</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:8px;font-family:monospace;background:#f0ede8;padding:14px 18px;border-radius:8px;">venice-2026/<br>&nbsp;&nbsp;index.html<br>&nbsp;&nbsp;photos/ &nbsp;&larr; 181 .jpg files, flat</p>
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Photo sources</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">158 from Kyle (IMG_1xxx HEIC) + 22 from Sarah (IMG_5xxx JPG) = 180 total. Each stop shows only photos from its time window, matched by EXIF timestamp.</p>
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Known gaps</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Several location labels approximate. Day summaries are placeholder text. Jun 25 stop is mainland north of airport, not Murano.</p>
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Changelog</h2>
+<div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
+<p style="margin-bottom:10px;"><strong>v1.0.1</strong> &mdash; July 5, 2026<br>Per-stop photo assignment by EXIF timestamp (each stop shows only its own photos). Map starts one zoom level closer. Version badge in footer.</p>
+<p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map, story, gallery, About. 180 photos across both cameras.</p>
 </div>
-<div id="gallery-section" class="section">
-  <div class="gallery-wrap">
-    <p class="section-heading">Memories, organized by day</p>
-    <div id="gallery-grid-wrap"></div>
-  </div>
-</div>
-
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-  <span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1, event)">&#8249;</span>
-  <img id="lightbox-img" src="" alt="">
-  <span class="lightbox-nav lightbox-next" onclick="lightboxNav(1, event)">&#8250;</span>
-  <div class="lightbox-caption" id="lightbox-caption"></div>
-</div>
-
-<div id="about-section" class="section">
-  <div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
-    <p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.0</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
-    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map of every stop plotted by GPS, a day-by-day story timeline with expandable stop details, and a full photo gallery with lightbox. Built to share via GitHub Pages and AirPlay to a TV.</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">File structure</h2>
-    <p style="font-size:14px;line-height:1.75;margin-bottom:8px;font-family:monospace;background:#f0ede8;padding:14px 18px;border-radius:8px;">venice-2026/<br>&nbsp;&nbsp;index.html &nbsp;&nbsp;&larr; this file<br>&nbsp;&nbsp;photos/ &nbsp;&nbsp;&nbsp;&nbsp;&larr; 181 .jpg files, flat (no subfolders)</p>
-    <p style="font-size:13px;color:#8a8178;margin-bottom:28px;">Photos are referenced as <code>photos/FILENAME.jpg</code>. All source HEIC and JPG files were converted to JPEG at 1800px max, quality 82, via pillow-heif.</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Photo sources</h2>
-    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">158 photos from Kyle's iPhone (IMG_1xxx, IMG_52xx HEIC series) &middot; 22 photos from Sarah's iPhone (IMG_5xxx JPG series, Venice Sarah folder) &middot; 180 total after deduplication. Story cards show a split thumbnail where both cameras captured the same day. GPS was present on all but one photo; ~22 photos near the Airbnb had GPS drift (~580m) and were corrected to the confirmed Airbnb coordinate (45.438, 12.336).</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Tech stack</h2>
-    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Single HTML file &middot; Leaflet 1.9.4 (inlined, no CDN dependency) &middot; OpenStreetMap tiles &middot; Google Fonts (Playfair Display + Inter) &middot; No framework, no build step &middot; Photos served as static files alongside HTML &middot; GitHub Pages hosting</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Known location gaps</h2>
-    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Several location labels are approximate (San Marco / Rialto area, San Polo area, Dorsoduro area) pending Kyle confirming exact spots from clusters B&ndash;F identified during EXIF analysis. Jun 25 departure stop labeled "north of airport via train" based on GPS coordinates north of Marco Polo airport on the mainland &mdash; not Murano as initially assumed.</p>
-
-    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;margin-top:8px;">Changelog</h2>
-    <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
-      <p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map with GPS-plotted stops, story timeline with dual thumbnails (Kyle + Sarah), full gallery with lightbox, About tab. 180 photos across both cameras, all converted to JPEG for universal browser compatibility. GPS drift corrected for Airbnb cluster.</p>
-    </div>
-
-    <div style="margin-top:40px;padding:20px 24px;background:#f0ede8;border-radius:10px;font-size:13px;line-height:1.75;color:#5b5550;">
-      <strong style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Note to future Claude</strong><br>
-      Read this tab first. The full build context lives in the Venice storyboard conversation thread (search "Venice storyboard" in past chats). Photo files live in <code>photos/</code> alongside this HTML. Timeline data, EXIF, and geocoding are in <code>/home/claude/</code> on the build machine but won't persist &mdash; the source of truth is this file and the photos folder. When adding narrative captions, edit the <code>DAYS</code> JS array <code>summary</code> fields directly. Location labels B&ndash;F in the timeline are still approximate &mdash; ask Kyle to confirm. Version bump the changelog above with each meaningful change.
-    </div>
-  </div>
-</div>
-
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.0</span></footer>
-
+<div style="margin-top:40px;padding:20px 24px;background:#f0ede8;border-radius:10px;font-size:13px;line-height:1.75;color:#5b5550;">
+<strong style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Note to future Claude</strong><br>
+Read this tab first. Timeline in timeline.json, photo assignments in photo_assignments.json on build machine. Edit DAYS JS array summary fields for narrative. Location labels B-F still approximate. Bump changelog with each change.
+</div></div></div>
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><span class="lightbox-close" onclick="closeLightbox()">&times;</span><span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">&#8249;</span><img id="lightbox-img" src="" alt=""><span class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">&#8250;</span><div class="lightbox-caption" id="lightbox-caption"></div></div>
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.1</span></footer>
 <script>
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
@@ -855,194 +779,131 @@ footer { text-align: center; padding: 32px; font-size: 11px; color: var(--muted)
 //# sourceMappingURL=leaflet.js.map
 </script>
 <script>
-const DAYS = [{"date": "2026-06-17", "label": "Wednesday, June 17", "title": "The Night Before", "summary": "Last night at home before the journey begins.", "theme": "departure_eve", "themeColor": "#C4A882", "themeLabel": "Eve of Departure", "heroKyle": "IMG_1081.jpg", "heroSarah": null, "photos": ["IMG_1081.jpg", "IMG_1087.jpg"], "kyleCount": 2, "sarahCount": 0, "totalPhotos": 2, "stops": [{"time": "17:45", "location": "Holly, MI", "lat": 42.213, "lon": -83.355, "note": "Pre-departure", "photoCount": 1}, {"time": "20:38", "location": "Holly, MI", "lat": 42.211, "lon": -83.358, "note": "", "photoCount": 1}]}, {"date": "2026-06-18", "label": "Thursday, June 18", "title": "Arrival", "summary": "Detroit \u2192 Paris CDG layover \u2192 Venice. First steps on the islands.", "theme": "travel", "themeColor": "#7B9BAD", "themeLabel": "Travel Day", "heroKyle": "IMG_1091.jpg", "heroSarah": "IMG_5197.jpg", "photos": ["IMG_1091.jpg", "IMG_1096.jpg", "IMG_1100.jpg", "IMG_1103.jpg", "IMG_1106.jpg", "IMG_1107.jpg", "IMG_1113.jpg", "IMG_1117.jpg", "IMG_1122.jpg", "IMG_1126.jpg", "IMG_1127.jpg", "IMG_1131.jpg", "IMG_5197.jpg", "IMG_1133.jpg"], "kyleCount": 13, "sarahCount": 1, "totalPhotos": 14, "stops": [{"time": "10:48", "location": "CDG Airport, Paris", "lat": 49.007, "lon": 2.584, "note": "Layover", "photoCount": 3}, {"time": "19:32", "location": "Venice \u2014 Piazzale Roma / Grand Canal", "lat": 45.501, "lon": 12.336, "note": "First step onto Venice", "photoCount": 3}, {"time": "19:42", "location": "Venice \u2014 Cannaregio", "lat": 45.451, "lon": 12.34, "note": "Water taxi route south", "photoCount": 1}, {"time": "19:45", "location": "Airbnb \u2014 San Marco", "lat": 45.438, "lon": 12.336, "note": "Arriving at the Airbnb", "photoCount": 6}]}, {"date": "2026-06-19", "label": "Friday, June 19", "title": "First Full Day", "summary": "Getting oriented \u2014 exploring the sestieri, finding the rhythm of Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1142.jpg", "heroSarah": "IMG_5200.jpg", "photos": ["IMG_1142.jpg", "IMG_1143.jpg", "IMG_1145.jpg", "IMG_1146.jpg", "IMG_1147.jpg", "IMG_1151.jpg", "IMG_1153.jpg", "IMG_1155.jpg", "IMG_1158.jpg", "IMG_5200.jpg", "IMG_5201.jpg", "IMG_5202.jpg", "IMG_1161.jpg", "IMG_1163.jpg", "IMG_1164.jpg", "IMG_1166.jpg", "IMG_1171.jpg", "IMG_1172.jpg", "IMG_1177.jpg", "IMG_5207.jpg", "IMG_5209.jpg", "IMG_1178.jpg", "IMG_1179.jpg"], "kyleCount": 19, "sarahCount": 4, "totalPhotos": 23, "stops": [{"time": "10:00", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Morning start", "photoCount": 1}, {"time": "10:24", "location": "San Marco / Rialto area", "lat": 45.435, "lon": 12.339, "note": "", "photoCount": 6}, {"time": "11:37", "location": "San Marco / Rialto area", "lat": 45.434, "lon": 12.338, "note": "", "photoCount": 2}, {"time": "13:11", "location": "San Marco / Rialto area", "lat": 45.435, "lon": 12.339, "note": "Lunch area", "photoCount": 4}, {"time": "14:25", "location": "Castello / Eastern San Marco", "lat": 45.434, "lon": 12.34, "note": "", "photoCount": 1}, {"time": "16:37", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Afternoon return", "photoCount": 2}, {"time": "20:46", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Evening", "photoCount": 3}]}, {"date": "2026-06-20", "label": "Saturday, June 20", "title": "Burano", "summary": "A full morning and afternoon on Burano \u2014 the island of color.", "theme": "island", "themeColor": "#D4875A", "themeLabel": "Island Day", "heroKyle": "IMG_1186.jpg", "heroSarah": null, "photos": ["IMG_1186.jpg", "IMG_1187.jpg", "IMG_1188.jpg", "IMG_1191.jpg", "IMG_1193.jpg", "IMG_1196.jpg", "IMG_1197.jpg", "IMG_1198.jpg", "IMG_1202.jpg", "IMG_1204.jpg", "IMG_1205.jpg", "IMG_1208.jpg", "IMG_1209.jpg", "IMG_1211.jpg", "IMG_1213.jpg", "IMG_1217.jpg", "IMG_1220.jpg", "IMG_1224.jpg", "IMG_1225.jpg", "IMG_1227.jpg", "IMG_1231.jpg", "IMG_1232.jpg", "IMG_5221.jpg", "IMG_1235.jpg", "IMG_1239.jpg", "IMG_1249.jpg", "IMG_1256.jpg", "IMG_1258.jpg", "IMG_1262.jpg"], "kyleCount": 29, "sarahCount": 0, "totalPhotos": 29, "stops": [{"time": "11:10", "location": "Airbnb \u2014 morning departure", "lat": 45.438, "lon": 12.336, "note": "", "photoCount": 1}, {"time": "12:13", "location": "Burano Island", "lat": 45.486, "lon": 12.416, "note": "21 photos \u2014 peak of the trip so far", "photoCount": 21}, {"time": "13:42", "location": "Burano Island", "lat": 45.485, "lon": 12.418, "note": "Late lunch, heading back", "photoCount": 1}, {"time": "16:42", "location": "Venice \u2014 back in sestiere", "lat": 45.438, "lon": 12.336, "note": "", "photoCount": 2}, {"time": "19:24", "location": "Castello area", "lat": 45.444, "lon": 12.339, "note": "Evening wander", "photoCount": 1}, {"time": "20:53", "location": "Near Airbnb", "lat": 45.441, "lon": 12.339, "note": "Late evening", "photoCount": 3}]}, {"date": "2026-06-21", "label": "Sunday, June 21", "title": "Dorsoduro", "summary": "A long morning in Dorsoduro \u2014 museums, canals, the quieter side of Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1268.jpg", "heroSarah": "IMG_5236.jpg", "photos": ["IMG_1268.jpg", "IMG_1273.jpg", "IMG_1275.jpg", "IMG_1278.jpg", "IMG_1285.jpg", "IMG_5236.jpg", "IMG_5238.jpg", "IMG_1290.jpg", "IMG_1299.jpg", "IMG_1301.jpg", "IMG_1303.jpg", "IMG_1310.jpg", "IMG_1315.jpg", "IMG_1317.jpg", "IMG_1318.jpg", "IMG_1319.jpg", "IMG_1320.jpg", "IMG_1323.jpg", "IMG_1325.jpg", "IMG_1329.jpg", "IMG_1335.jpg", "IMG_1356.jpg", "IMG_1359.jpg", "IMG_1360.jpg", "IMG_1361.jpg", "IMG_1363.jpg", "IMG_1364.jpg"], "kyleCount": 25, "sarahCount": 2, "totalPhotos": 27, "stops": [{"time": "09:41", "location": "Airbnb \u2014 morning", "lat": 45.438, "lon": 12.336, "note": "", "photoCount": 2}, {"time": "10:31", "location": "Dorsoduro / Accademia area", "lat": 45.432, "lon": 12.327, "note": "Long morning here", "photoCount": 12}, {"time": "13:28", "location": "Dorsoduro \u2014 eastern edge", "lat": 45.431, "lon": 12.329, "note": "", "photoCount": 3}, {"time": "13:38", "location": "San Polo / Rialto direction", "lat": 45.434, "lon": 12.332, "note": "Heading back", "photoCount": 2}, {"time": "16:26", "location": "Near Airbnb", "lat": 45.438, "lon": 12.336, "note": "Afternoon", "photoCount": 4}, {"time": "16:44", "location": "Near Airbnb", "lat": 45.438, "lon": 12.337, "note": "", "photoCount": 2}]}, {"date": "2026-06-22", "label": "Monday, June 22", "title": "Monday in Venice", "summary": "A slower day \u2014 deeper into the calli, evening by the water.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1370.jpg", "heroSarah": "IMG_5255.jpg", "photos": ["IMG_5255.jpg", "IMG_1370.jpg", "IMG_1375.jpg", "IMG_1376.jpg", "IMG_1378.jpg", "IMG_5257.jpg", "IMG_1382.jpg", "IMG_1384.jpg", "IMG_5261.jpg", "IMG_1385.jpg", "IMG_5266.jpg", "IMG_5268.jpg", "IMG_1387.jpg", "IMG_1390.jpg", "IMG_5274.jpg", "IMG_5276.jpg", "IMG_1396.jpg", "IMG_5286.jpg", "IMG_1399.jpg", "IMG_5293.jpg", "IMG_5295.jpg", "IMG_5296.jpg", "IMG_1405.jpg", "IMG_1406.jpg", "IMG_1408.jpg"], "kyleCount": 22, "sarahCount": 3, "totalPhotos": 25, "stops": [{"time": "12:53", "location": "San Polo area", "lat": 45.431, "lon": 12.332, "note": "", "photoCount": 1}, {"time": "13:16", "location": "San Polo area", "lat": 45.431, "lon": 12.331, "note": "Long afternoon stop", "photoCount": 14}, {"time": "18:23", "location": "Western Venice", "lat": 45.436, "lon": 12.33, "note": "Evening wander", "photoCount": 1}, {"time": "18:52", "location": "Castello \u2014 eastern canals", "lat": 45.434, "lon": 12.345, "note": "", "photoCount": 3}, {"time": "20:18", "location": "Castello \u2014 eastern canals", "lat": 45.434, "lon": 12.344, "note": "Evening by the water", "photoCount": 2}, {"time": "20:52", "location": "Near Airbnb", "lat": 45.438, "lon": 12.334, "note": "Night", "photoCount": 1}]}, {"date": "2026-06-23", "label": "Tuesday, June 23", "title": "The Long Afternoon", "summary": "A full day out \u2014 morning into San Polo, a long afternoon stop, late night Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1420.jpg", "heroSarah": "IMG_5304.jpg", "photos": ["IMG_1420.jpg", "IMG_1422.jpg", "IMG_5304.jpg", "IMG_1438.jpg", "IMG_1440.jpg", "IMG_1442.jpg", "IMG_1446.jpg", "IMG_1451.jpg", "IMG_1454.jpg", "IMG_1457.jpg", "IMG_5305.jpg", "IMG_1458.jpg", "IMG_1459.jpg", "IMG_1460.jpg", "IMG_5309.jpg", "IMG_1464.jpg", "IMG_1467.jpg", "IMG_1471.jpg", "IMG_1475.jpg", "IMG_1477.jpg", "IMG_1479.jpg", "IMG_1481.jpg", "IMG_1482.jpg", "IMG_1483.jpg", "IMG_1488.jpg", "IMG_1491.jpg", "IMG_1492.jpg", "IMG_1497.jpg", "IMG_1498.jpg", "IMG_1499.jpg", "IMG_5310.jpg", "IMG_1508.jpg"], "kyleCount": 28, "sarahCount": 4, "totalPhotos": 32, "stops": [{"time": "12:20", "location": "Near Airbnb", "lat": 45.438, "lon": 12.334, "note": "Late morning start", "photoCount": 1}, {"time": "12:34", "location": "San Polo direction", "lat": 45.436, "lon": 12.332, "note": "", "photoCount": 1}, {"time": "12:58", "location": "Dorsoduro / San Polo", "lat": 45.431, "lon": 12.328, "note": "", "photoCount": 10}, {"time": "16:42", "location": "Near Airbnb \u2014 long stop", "lat": 45.438, "lon": 12.336, "note": "12 photos \u2014 significant moment", "photoCount": 12}, {"time": "17:42", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "", "photoCount": 3}, {"time": "22:30", "location": "Night Venice \u2014 near Airbnb", "lat": 45.44, "lon": 12.337, "note": "Late night out", "photoCount": 1}]}, {"date": "2026-06-24", "label": "Wednesday, June 24", "title": "Anniversary \u2014 20 Years", "summary": "Their 20th anniversary. Morning light, an evening dinner at Caff\u00e8 Saraceno.", "theme": "anniversary", "themeColor": "#C4788A", "themeLabel": "20th Anniversary", "heroKyle": "IMG_1515.jpg", "heroSarah": "IMG_5315.jpg", "photos": ["IMG_1515.jpg", "IMG_1517.jpg", "IMG_1520.jpg", "IMG_1524.jpg", "IMG_1527.jpg", "IMG_1529.jpg", "IMG_1533.jpg", "IMG_5315.jpg", "IMG_1536.jpg", "IMG_1539.jpg", "IMG_5319.jpg", "IMG_5320.jpg", "IMG_5321.jpg", "IMG_1542.jpg", "IMG_1549.jpg", "IMG_1552.jpg", "IMG_1553.jpg", "IMG_1568.jpg", "IMG_1573.jpg", "IMG_1577.jpg"], "kyleCount": 16, "sarahCount": 4, "totalPhotos": 20, "stops": [{"time": "09:27", "location": "Near Airbnb \u2014 morning golden hour", "lat": 45.438, "lon": 12.336, "note": "7 photos \u2014 anniversary morning", "photoCount": 7}, {"time": "10:15", "location": "Morning walk", "lat": 45.437, "lon": 12.337, "note": "", "photoCount": 2}, {"time": "12:16", "location": "Airbnb area \u2014 midday", "lat": 45.438, "lon": 12.336, "note": "", "photoCount": 1}, {"time": "16:12", "location": "Near Caff\u00e8 Saraceno area", "lat": 45.434, "lon": 12.339, "note": "Pre-dinner, anniversary evening", "photoCount": 3}, {"time": "18:51", "location": "Anniversary dinner \u2014 Caff\u00e8 Saraceno", "lat": 45.438, "lon": 12.336, "note": "Dinner reservation #4408, 7:15 PM", "photoCount": 3}]}, {"date": "2026-06-25", "label": "Thursday, June 25", "title": "Last Morning", "summary": "A final morning in Venice, then north by train toward the airport.", "theme": "departure", "themeColor": "#9B8FAF", "themeLabel": "Homeward", "heroKyle": "IMG_1581.jpg", "heroSarah": "IMG_5327.jpg", "photos": ["IMG_1581.jpg", "IMG_5327.jpg", "IMG_1584.jpg", "IMG_5329.jpg"], "kyleCount": 2, "sarahCount": 2, "totalPhotos": 4, "stops": [{"time": "12:21", "location": "Western Venice \u2014 train direction", "lat": 45.442, "lon": 12.317, "note": "Heading toward Santa Lucia station", "photoCount": 1}, {"time": "13:05", "location": "Mainland \u2014 north of airport", "lat": 45.574, "lon": 12.364, "note": "Train north", "photoCount": 1}]}, {"date": "2026-06-26", "label": "Friday, June 26", "title": "The Journey Home", "summary": "Through CDG, then back to Michigan.", "theme": "departure", "themeColor": "#9B8FAF", "themeLabel": "Homeward", "heroKyle": "IMG_1603.jpg", "heroSarah": "IMG_5333.jpg", "photos": ["IMG_1603.jpg", "IMG_5333.jpg", "IMG_1610.jpg", "IMG_5336.jpg"], "kyleCount": 2, "sarahCount": 2, "totalPhotos": 4, "stops": [{"time": "08:31", "location": "Venice Marco Polo Airport area", "lat": 45.505, "lon": 12.341, "note": "Departure", "photoCount": 1}, {"time": "14:42", "location": "CDG Airport, Paris", "lat": 49.003, "lon": 2.591, "note": "Connecting home", "photoCount": 1}]}];
-const POINTS = [{"lat": 42.213, "lon": -83.355, "time": "17:45", "location": "Holly, MI", "note": "Pre-departure", "date": "2026-06-17", "dayTitle": "The Night Before", "color": "#C4A882", "photoCount": 1}, {"lat": 42.211, "lon": -83.358, "time": "20:38", "location": "Holly, MI", "note": "", "date": "2026-06-17", "dayTitle": "The Night Before", "color": "#C4A882", "photoCount": 1}, {"lat": 49.007, "lon": 2.584, "time": "10:48", "location": "CDG Airport, Paris", "note": "Layover", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 3}, {"lat": 45.501, "lon": 12.336, "time": "19:32", "location": "Venice \u2014 Piazzale Roma / Grand Canal", "note": "First step onto Venice", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 3}, {"lat": 45.451, "lon": 12.34, "time": "19:42", "location": "Venice \u2014 Cannaregio", "note": "Water taxi route south", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "19:45", "location": "Airbnb \u2014 San Marco", "note": "Arriving at the Airbnb", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 6}, {"lat": 45.438, "lon": 12.336, "time": "10:00", "location": "Airbnb area", "note": "Morning start", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.435, "lon": 12.339, "time": "10:24", "location": "San Marco / Rialto area", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 6}, {"lat": 45.434, "lon": 12.338, "time": "11:37", "location": "San Marco / Rialto area", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.435, "lon": 12.339, "time": "13:11", "location": "San Marco / Rialto area", "note": "Lunch area", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.434, "lon": 12.34, "time": "14:25", "location": "Castello / Eastern San Marco", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "16:37", "location": "Airbnb area", "note": "Afternoon return", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.336, "time": "20:46", "location": "Airbnb area", "note": "Evening", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.438, "lon": 12.336, "time": "11:10", "location": "Airbnb \u2014 morning departure", "note": "", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.486, "lon": 12.416, "time": "12:13", "location": "Burano Island", "note": "21 photos \u2014 peak of the trip so far", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 21}, {"lat": 45.485, "lon": 12.418, "time": "13:42", "location": "Burano Island", "note": "Late lunch, heading back", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "16:42", "location": "Venice \u2014 back in sestiere", "note": "", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 2}, {"lat": 45.444, "lon": 12.339, "time": "19:24", "location": "Castello area", "note": "Evening wander", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.441, "lon": 12.339, "time": "20:53", "location": "Near Airbnb", "note": "Late evening", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 3}, {"lat": 45.438, "lon": 12.336, "time": "09:41", "location": "Airbnb \u2014 morning", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.432, "lon": 12.327, "time": "10:31", "location": "Dorsoduro / Accademia area", "note": "Long morning here", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 12}, {"lat": 45.431, "lon": 12.329, "time": "13:28", "location": "Dorsoduro \u2014 eastern edge", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.434, "lon": 12.332, "time": "13:38", "location": "San Polo / Rialto direction", "note": "Heading back", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.336, "time": "16:26", "location": "Near Airbnb", "note": "Afternoon", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.438, "lon": 12.337, "time": "16:44", "location": "Near Airbnb", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.431, "lon": 12.332, "time": "12:53", "location": "San Polo area", "note": "", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.431, "lon": 12.331, "time": "13:16", "location": "San Polo area", "note": "Long afternoon stop", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 14}, {"lat": 45.436, "lon": 12.33, "time": "18:23", "location": "Western Venice", "note": "Evening wander", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.434, "lon": 12.345, "time": "18:52", "location": "Castello \u2014 eastern canals", "note": "", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.434, "lon": 12.344, "time": "20:18", "location": "Castello \u2014 eastern canals", "note": "Evening by the water", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.334, "time": "20:52", "location": "Near Airbnb", "note": "Night", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.334, "time": "12:20", "location": "Near Airbnb", "note": "Late morning start", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.436, "lon": 12.332, "time": "12:34", "location": "San Polo direction", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.431, "lon": 12.328, "time": "12:58", "location": "Dorsoduro / San Polo", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 10}, {"lat": 45.438, "lon": 12.336, "time": "16:42", "location": "Near Airbnb \u2014 long stop", "note": "12 photos \u2014 significant moment", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 12}, {"lat": 45.438, "lon": 12.336, "time": "17:42", "location": "Airbnb area", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.44, "lon": 12.337, "time": "22:30", "location": "Night Venice \u2014 near Airbnb", "note": "Late night out", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "09:27", "location": "Near Airbnb \u2014 morning golden hour", "note": "7 photos \u2014 anniversary morning", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 7}, {"lat": 45.437, "lon": 12.337, "time": "10:15", "location": "Morning walk", "note": "", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 2}, {"lat": 45.438, "lon": 12.336, "time": "12:16", "location": "Airbnb area \u2014 midday", "note": "", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 1}, {"lat": 45.434, "lon": 12.339, "time": "16:12", "location": "Near Caff\u00e8 Saraceno area", "note": "Pre-dinner, anniversary evening", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 3}, {"lat": 45.438, "lon": 12.336, "time": "18:51", "location": "Anniversary dinner \u2014 Caff\u00e8 Saraceno", "note": "Dinner reservation #4408, 7:15 PM", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 3}, {"lat": 45.442, "lon": 12.317, "time": "12:21", "location": "Western Venice \u2014 train direction", "note": "Heading toward Santa Lucia station", "date": "2026-06-25", "dayTitle": "Last Morning", "color": "#9B8FAF", "photoCount": 1}, {"lat": 45.574, "lon": 12.364, "time": "13:05", "location": "Mainland \u2014 north of airport", "note": "Train north", "date": "2026-06-25", "dayTitle": "Last Morning", "color": "#9B8FAF", "photoCount": 1}, {"lat": 45.505, "lon": 12.341, "time": "08:31", "location": "Venice Marco Polo Airport area", "note": "Departure", "date": "2026-06-26", "dayTitle": "The Journey Home", "color": "#9B8FAF", "photoCount": 1}, {"lat": 49.003, "lon": 2.591, "time": "14:42", "location": "CDG Airport, Paris", "note": "Connecting home", "date": "2026-06-26", "dayTitle": "The Journey Home", "color": "#9B8FAF", "photoCount": 1}];
-const PHOTO_BASE = 'photos/';
+const DAYS=[{"date": "2026-06-17", "label": "Wednesday, June 17", "title": "The Night Before", "summary": "Last night at home before the journey begins.", "theme": "departure_eve", "themeColor": "#C4A882", "themeLabel": "Eve of Departure", "heroKyle": "IMG_1081.jpg", "heroSarah": null, "allPhotos": ["IMG_1081.jpg", "IMG_1087.jpg"], "totalPhotos": 2, "stops": [{"time": "17:45", "location": "Holly, MI", "lat": 42.213, "lon": -83.355, "note": "Pre-departure", "photos": ["IMG_1081.jpg"]}, {"time": "20:38", "location": "Holly, MI", "lat": 42.211, "lon": -83.358, "note": "", "photos": ["IMG_1087.jpg"]}]}, {"date": "2026-06-18", "label": "Thursday, June 18", "title": "Arrival", "summary": "Detroit \u2192 Paris CDG layover \u2192 Venice. First steps on the islands.", "theme": "travel", "themeColor": "#7B9BAD", "themeLabel": "Travel Day", "heroKyle": "IMG_1091.jpg", "heroSarah": "IMG_5197.jpg", "allPhotos": ["IMG_1091.jpg", "IMG_1096.jpg", "IMG_1100.jpg", "IMG_1103.jpg", "IMG_1106.jpg", "IMG_1107.jpg", "IMG_1113.jpg", "IMG_1117.jpg", "IMG_1122.jpg", "IMG_1126.jpg", "IMG_1127.jpg", "IMG_1131.jpg", "IMG_5197.jpg", "IMG_1133.jpg"], "totalPhotos": 14, "stops": [{"time": "10:48", "location": "CDG Airport, Paris", "lat": 49.007, "lon": 2.584, "note": "Layover", "photos": ["IMG_1091.jpg", "IMG_1096.jpg", "IMG_1100.jpg"]}, {"time": "19:32", "location": "Venice \u2014 Piazzale Roma / Grand Canal", "lat": 45.501, "lon": 12.336, "note": "First step onto Venice", "photos": ["IMG_1103.jpg", "IMG_1106.jpg", "IMG_1107.jpg"]}, {"time": "19:42", "location": "Venice \u2014 Cannaregio", "lat": 45.451, "lon": 12.34, "note": "Water taxi route south", "photos": ["IMG_1113.jpg"]}, {"time": "19:45", "location": "Airbnb \u2014 San Marco", "lat": 45.438, "lon": 12.336, "note": "Arriving at the Airbnb", "photos": ["IMG_1117.jpg", "IMG_1122.jpg", "IMG_1126.jpg", "IMG_1127.jpg", "IMG_1131.jpg", "IMG_5197.jpg", "IMG_1133.jpg"]}]}, {"date": "2026-06-19", "label": "Friday, June 19", "title": "First Full Day", "summary": "Getting oriented \u2014 exploring the sestieri, finding the rhythm of Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1142.jpg", "heroSarah": "IMG_5200.jpg", "allPhotos": ["IMG_1142.jpg", "IMG_1143.jpg", "IMG_1145.jpg", "IMG_1146.jpg", "IMG_1147.jpg", "IMG_1151.jpg", "IMG_1153.jpg", "IMG_1155.jpg", "IMG_1158.jpg", "IMG_5200.jpg", "IMG_5201.jpg", "IMG_5202.jpg", "IMG_1161.jpg", "IMG_1163.jpg", "IMG_1164.jpg", "IMG_1166.jpg", "IMG_1171.jpg", "IMG_1172.jpg", "IMG_1177.jpg", "IMG_5207.jpg", "IMG_5209.jpg", "IMG_1178.jpg", "IMG_1179.jpg"], "totalPhotos": 23, "stops": [{"time": "10:00", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Morning start", "photos": ["IMG_1142.jpg"]}, {"time": "10:24", "location": "San Marco / Rialto area", "lat": 45.435, "lon": 12.339, "note": "", "photos": ["IMG_1143.jpg", "IMG_1145.jpg", "IMG_1146.jpg", "IMG_1147.jpg", "IMG_1151.jpg", "IMG_1153.jpg"]}, {"time": "11:37", "location": "San Marco / Rialto area", "lat": 45.434, "lon": 12.338, "note": "", "photos": ["IMG_1155.jpg", "IMG_1158.jpg", "IMG_5200.jpg", "IMG_5201.jpg", "IMG_5202.jpg"]}, {"time": "13:11", "location": "San Marco / Rialto area", "lat": 45.435, "lon": 12.339, "note": "Lunch area", "photos": ["IMG_1161.jpg", "IMG_1163.jpg", "IMG_1164.jpg", "IMG_1166.jpg"]}, {"time": "14:25", "location": "Castello / Eastern San Marco", "lat": 45.434, "lon": 12.34, "note": "", "photos": ["IMG_1171.jpg"]}, {"time": "16:37", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Afternoon return", "photos": ["IMG_1172.jpg", "IMG_1177.jpg"]}, {"time": "20:46", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "Evening", "photos": ["IMG_5207.jpg", "IMG_5209.jpg", "IMG_1178.jpg", "IMG_1179.jpg"]}]}, {"date": "2026-06-20", "label": "Saturday, June 20", "title": "Burano", "summary": "A full morning and afternoon on Burano \u2014 the island of color.", "theme": "island", "themeColor": "#D4875A", "themeLabel": "Island Day", "heroKyle": "IMG_1186.jpg", "heroSarah": "IMG_5221.jpg", "allPhotos": ["IMG_1186.jpg", "IMG_1187.jpg", "IMG_1188.jpg", "IMG_1191.jpg", "IMG_1193.jpg", "IMG_1196.jpg", "IMG_1197.jpg", "IMG_1198.jpg", "IMG_1202.jpg", "IMG_1204.jpg", "IMG_1205.jpg", "IMG_1208.jpg", "IMG_1209.jpg", "IMG_1211.jpg", "IMG_1213.jpg", "IMG_1217.jpg", "IMG_1220.jpg", "IMG_1224.jpg", "IMG_1225.jpg", "IMG_1227.jpg", "IMG_1231.jpg", "IMG_1232.jpg", "IMG_5221.jpg", "IMG_1235.jpg", "IMG_1239.jpg", "IMG_1249.jpg", "IMG_1256.jpg", "IMG_1258.jpg", "IMG_1262.jpg"], "totalPhotos": 29, "stops": [{"time": "11:10", "location": "Airbnb \u2014 morning departure", "lat": 45.438, "lon": 12.336, "note": "", "photos": ["IMG_1186.jpg"]}, {"time": "12:13", "location": "Burano Island", "lat": 45.486, "lon": 12.416, "note": "21 photos \u2014 peak of the trip so far", "photos": ["IMG_1187.jpg", "IMG_1188.jpg", "IMG_1191.jpg", "IMG_1193.jpg", "IMG_1196.jpg", "IMG_1197.jpg", "IMG_1198.jpg", "IMG_1202.jpg", "IMG_1204.jpg", "IMG_1205.jpg", "IMG_1208.jpg", "IMG_1209.jpg", "IMG_1211.jpg", "IMG_1213.jpg", "IMG_1217.jpg", "IMG_1220.jpg", "IMG_1224.jpg", "IMG_1225.jpg", "IMG_1227.jpg", "IMG_1231.jpg", "IMG_1232.jpg"]}, {"time": "13:42", "location": "Burano Island", "lat": 45.485, "lon": 12.418, "note": "Late lunch, heading back", "photos": ["IMG_5221.jpg"]}, {"time": "16:42", "location": "Venice \u2014 back in sestiere", "lat": 45.438, "lon": 12.336, "note": "", "photos": ["IMG_1235.jpg", "IMG_1239.jpg"]}, {"time": "19:24", "location": "Castello area", "lat": 45.444, "lon": 12.339, "note": "Evening wander", "photos": ["IMG_1249.jpg"]}, {"time": "20:53", "location": "Near Airbnb", "lat": 45.441, "lon": 12.339, "note": "Late evening", "photos": ["IMG_1256.jpg", "IMG_1258.jpg", "IMG_1262.jpg"]}]}, {"date": "2026-06-21", "label": "Sunday, June 21", "title": "Dorsoduro", "summary": "A long morning in Dorsoduro \u2014 museums, canals, the quieter side of Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1268.jpg", "heroSarah": "IMG_5236.jpg", "allPhotos": ["IMG_1268.jpg", "IMG_1273.jpg", "IMG_1275.jpg", "IMG_1278.jpg", "IMG_1285.jpg", "IMG_5236.jpg", "IMG_5238.jpg", "IMG_1290.jpg", "IMG_1299.jpg", "IMG_1301.jpg", "IMG_1303.jpg", "IMG_1310.jpg", "IMG_1315.jpg", "IMG_1317.jpg", "IMG_1318.jpg", "IMG_1319.jpg", "IMG_1320.jpg", "IMG_1323.jpg", "IMG_1325.jpg", "IMG_1329.jpg", "IMG_1335.jpg", "IMG_1356.jpg", "IMG_1359.jpg", "IMG_1360.jpg", "IMG_1361.jpg", "IMG_1363.jpg", "IMG_1364.jpg"], "totalPhotos": 27, "stops": [{"time": "09:41", "location": "Airbnb \u2014 morning", "lat": 45.438, "lon": 12.336, "note": "", "photos": ["IMG_1268.jpg", "IMG_1273.jpg"]}, {"time": "10:31", "location": "Dorsoduro / Accademia area", "lat": 45.432, "lon": 12.327, "note": "Long morning here", "photos": ["IMG_1275.jpg", "IMG_1278.jpg", "IMG_1285.jpg", "IMG_5236.jpg", "IMG_5238.jpg", "IMG_1290.jpg", "IMG_1299.jpg", "IMG_1301.jpg", "IMG_1303.jpg", "IMG_1310.jpg", "IMG_1315.jpg", "IMG_1317.jpg", "IMG_1318.jpg", "IMG_1319.jpg"]}, {"time": "13:28", "location": "Dorsoduro \u2014 eastern edge", "lat": 45.431, "lon": 12.329, "note": "", "photos": ["IMG_1320.jpg", "IMG_1323.jpg", "IMG_1325.jpg"]}, {"time": "13:38", "location": "San Polo / Rialto direction", "lat": 45.434, "lon": 12.332, "note": "Heading back", "photos": ["IMG_1329.jpg", "IMG_1335.jpg"]}, {"time": "16:26", "location": "Near Airbnb", "lat": 45.438, "lon": 12.336, "note": "Afternoon", "photos": ["IMG_1356.jpg", "IMG_1359.jpg", "IMG_1360.jpg", "IMG_1361.jpg"]}, {"time": "16:44", "location": "Near Airbnb", "lat": 45.438, "lon": 12.337, "note": "", "photos": ["IMG_1363.jpg", "IMG_1364.jpg"]}]}, {"date": "2026-06-22", "label": "Monday, June 22", "title": "Monday in Venice", "summary": "A slower day \u2014 deeper into the calli, evening by the water.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_5255.jpg", "heroSarah": "IMG_5255.jpg", "allPhotos": ["IMG_5255.jpg", "IMG_1370.jpg", "IMG_1375.jpg", "IMG_1376.jpg", "IMG_1378.jpg", "IMG_5257.jpg", "IMG_1382.jpg", "IMG_1384.jpg", "IMG_5261.jpg", "IMG_1385.jpg", "IMG_5266.jpg", "IMG_5268.jpg", "IMG_1387.jpg", "IMG_1390.jpg", "IMG_5274.jpg", "IMG_5276.jpg", "IMG_1396.jpg", "IMG_5286.jpg", "IMG_1399.jpg", "IMG_5293.jpg", "IMG_5295.jpg", "IMG_5296.jpg", "IMG_1405.jpg", "IMG_1406.jpg", "IMG_1408.jpg"], "totalPhotos": 25, "stops": [{"time": "12:53", "location": "San Polo area", "lat": 45.431, "lon": 12.332, "note": "", "photos": ["IMG_5255.jpg", "IMG_1370.jpg"]}, {"time": "13:16", "location": "San Polo area", "lat": 45.431, "lon": 12.331, "note": "Long afternoon stop", "photos": ["IMG_1375.jpg", "IMG_1376.jpg", "IMG_1378.jpg", "IMG_5257.jpg", "IMG_1382.jpg", "IMG_1384.jpg", "IMG_5261.jpg", "IMG_1385.jpg", "IMG_5266.jpg", "IMG_5268.jpg", "IMG_1387.jpg", "IMG_1390.jpg", "IMG_5274.jpg", "IMG_5276.jpg", "IMG_1396.jpg", "IMG_5286.jpg"]}, {"time": "18:23", "location": "Western Venice", "lat": 45.436, "lon": 12.33, "note": "Evening wander", "photos": ["IMG_1399.jpg"]}, {"time": "18:52", "location": "Castello \u2014 eastern canals", "lat": 45.434, "lon": 12.345, "note": "", "photos": ["IMG_5293.jpg", "IMG_5295.jpg", "IMG_5296.jpg"]}, {"time": "20:18", "location": "Castello \u2014 eastern canals", "lat": 45.434, "lon": 12.344, "note": "Evening by the water", "photos": ["IMG_1405.jpg", "IMG_1406.jpg"]}, {"time": "20:52", "location": "Near Airbnb", "lat": 45.438, "lon": 12.334, "note": "Night", "photos": ["IMG_1408.jpg"]}]}, {"date": "2026-06-23", "label": "Tuesday, June 23", "title": "The Long Afternoon", "summary": "A full day out \u2014 morning into San Polo, a long afternoon stop, late night Venice.", "theme": "explore", "themeColor": "#8FAF8A", "themeLabel": "Exploring", "heroKyle": "IMG_1420.jpg", "heroSarah": "IMG_5304.jpg", "allPhotos": ["IMG_1420.jpg", "IMG_1422.jpg", "IMG_5304.jpg", "IMG_1438.jpg", "IMG_1440.jpg", "IMG_1442.jpg", "IMG_1446.jpg", "IMG_1451.jpg", "IMG_1454.jpg", "IMG_1457.jpg", "IMG_5305.jpg", "IMG_1458.jpg", "IMG_1459.jpg", "IMG_1460.jpg", "IMG_5309.jpg", "IMG_1464.jpg", "IMG_1467.jpg", "IMG_1471.jpg", "IMG_1475.jpg", "IMG_1477.jpg", "IMG_1479.jpg", "IMG_1481.jpg", "IMG_1482.jpg", "IMG_1483.jpg", "IMG_1488.jpg", "IMG_1491.jpg", "IMG_1492.jpg", "IMG_1497.jpg", "IMG_1498.jpg", "IMG_1499.jpg", "IMG_5310.jpg", "IMG_1508.jpg"], "totalPhotos": 32, "stops": [{"time": "12:20", "location": "Near Airbnb", "lat": 45.438, "lon": 12.334, "note": "Late morning start", "photos": ["IMG_1420.jpg"]}, {"time": "12:34", "location": "San Polo direction", "lat": 45.436, "lon": 12.332, "note": "", "photos": ["IMG_1422.jpg", "IMG_5304.jpg"]}, {"time": "12:58", "location": "Dorsoduro / San Polo", "lat": 45.431, "lon": 12.328, "note": "", "photos": ["IMG_1438.jpg", "IMG_1440.jpg", "IMG_1442.jpg", "IMG_1446.jpg", "IMG_1451.jpg", "IMG_1454.jpg", "IMG_1457.jpg", "IMG_5305.jpg", "IMG_1458.jpg", "IMG_1459.jpg", "IMG_1460.jpg", "IMG_5309.jpg"]}, {"time": "16:42", "location": "Near Airbnb \u2014 long stop", "lat": 45.438, "lon": 12.336, "note": "12 photos \u2014 significant moment", "photos": ["IMG_1464.jpg", "IMG_1467.jpg", "IMG_1471.jpg", "IMG_1475.jpg", "IMG_1477.jpg", "IMG_1479.jpg", "IMG_1481.jpg", "IMG_1482.jpg", "IMG_1483.jpg", "IMG_1488.jpg", "IMG_1491.jpg", "IMG_1492.jpg"]}, {"time": "17:42", "location": "Airbnb area", "lat": 45.438, "lon": 12.336, "note": "", "photos": ["IMG_1497.jpg", "IMG_1498.jpg", "IMG_1499.jpg", "IMG_5310.jpg"]}, {"time": "22:30", "location": "Night Venice \u2014 near Airbnb", "lat": 45.44, "lon": 12.337, "note": "Late night out", "photos": ["IMG_1508.jpg"]}]}, {"date": "2026-06-24", "label": "Wednesday, June 24", "title": "Anniversary \u2014 20 Years", "summary": "Their 20th anniversary. Morning light, an evening dinner at Caff\u00e8 Saraceno.", "theme": "anniversary", "themeColor": "#C4788A", "themeLabel": "20th Anniversary", "heroKyle": "IMG_1515.jpg", "heroSarah": "IMG_5315.jpg", "allPhotos": ["IMG_1515.jpg", "IMG_1517.jpg", "IMG_1520.jpg", "IMG_1524.jpg", "IMG_1527.jpg", "IMG_1529.jpg", "IMG_1533.jpg", "IMG_5315.jpg", "IMG_1536.jpg", "IMG_1539.jpg", "IMG_5319.jpg", "IMG_5320.jpg", "IMG_5321.jpg", "IMG_1542.jpg", "IMG_1549.jpg", "IMG_1552.jpg", "IMG_1553.jpg", "IMG_1568.jpg", "IMG_1573.jpg", "IMG_1577.jpg"], "totalPhotos": 20, "stops": [{"time": "09:27", "location": "Near Airbnb \u2014 morning golden hour", "lat": 45.438, "lon": 12.336, "note": "7 photos \u2014 anniversary morning", "photos": ["IMG_1515.jpg", "IMG_1517.jpg", "IMG_1520.jpg", "IMG_1524.jpg", "IMG_1527.jpg", "IMG_1529.jpg", "IMG_1533.jpg", "IMG_5315.jpg"]}, {"time": "10:15", "location": "Morning walk", "lat": 45.437, "lon": 12.337, "note": "", "photos": ["IMG_1536.jpg", "IMG_1539.jpg", "IMG_5319.jpg", "IMG_5320.jpg"]}, {"time": "12:16", "location": "Airbnb area \u2014 midday", "lat": 45.438, "lon": 12.336, "note": "", "photos": ["IMG_5321.jpg", "IMG_1542.jpg"]}, {"time": "16:12", "location": "Near Caff\u00e8 Saraceno area", "lat": 45.434, "lon": 12.339, "note": "Pre-dinner, anniversary evening", "photos": ["IMG_1549.jpg", "IMG_1552.jpg", "IMG_1553.jpg"]}, {"time": "18:51", "location": "Anniversary dinner \u2014 Caff\u00e8 Saraceno", "lat": 45.438, "lon": 12.336, "note": "Dinner reservation #4408, 7:15 PM", "photos": ["IMG_1568.jpg", "IMG_1573.jpg", "IMG_1577.jpg"]}]}, {"date": "2026-06-25", "label": "Thursday, June 25", "title": "Last Morning", "summary": "A final morning in Venice, then north by train toward the airport.", "theme": "departure", "themeColor": "#9B8FAF", "themeLabel": "Homeward", "heroKyle": "IMG_1581.jpg", "heroSarah": "IMG_5327.jpg", "allPhotos": ["IMG_1581.jpg", "IMG_5327.jpg", "IMG_1584.jpg", "IMG_5329.jpg"], "totalPhotos": 4, "stops": [{"time": "12:21", "location": "Western Venice \u2014 train direction", "lat": 45.442, "lon": 12.317, "note": "Heading toward Santa Lucia station", "photos": ["IMG_1581.jpg", "IMG_5327.jpg"]}, {"time": "13:05", "location": "Mainland \u2014 north of airport", "lat": 45.574, "lon": 12.364, "note": "Train north", "photos": ["IMG_1584.jpg", "IMG_5329.jpg"]}]}, {"date": "2026-06-26", "label": "Friday, June 26", "title": "The Journey Home", "summary": "Through CDG, then back to Michigan.", "theme": "departure", "themeColor": "#9B8FAF", "themeLabel": "Homeward", "heroKyle": "IMG_1603.jpg", "heroSarah": "IMG_5333.jpg", "allPhotos": ["IMG_1603.jpg", "IMG_5333.jpg", "IMG_1610.jpg", "IMG_5336.jpg"], "totalPhotos": 4, "stops": [{"time": "08:31", "location": "Venice Marco Polo Airport area", "lat": 45.505, "lon": 12.341, "note": "Departure", "photos": ["IMG_1603.jpg", "IMG_5333.jpg"]}, {"time": "14:42", "location": "CDG Airport, Paris", "lat": 49.003, "lon": 2.591, "note": "Connecting home", "photos": ["IMG_1610.jpg", "IMG_5336.jpg"]}]}];
+const POINTS=[{"lat": 42.213, "lon": -83.355, "time": "17:45", "location": "Holly, MI", "note": "Pre-departure", "date": "2026-06-17", "dayTitle": "The Night Before", "color": "#C4A882", "photoCount": 1}, {"lat": 42.211, "lon": -83.358, "time": "20:38", "location": "Holly, MI", "note": "", "date": "2026-06-17", "dayTitle": "The Night Before", "color": "#C4A882", "photoCount": 1}, {"lat": 49.007, "lon": 2.584, "time": "10:48", "location": "CDG Airport, Paris", "note": "Layover", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 3}, {"lat": 45.501, "lon": 12.336, "time": "19:32", "location": "Venice \u2014 Piazzale Roma / Grand Canal", "note": "First step onto Venice", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 3}, {"lat": 45.451, "lon": 12.34, "time": "19:42", "location": "Venice \u2014 Cannaregio", "note": "Water taxi route south", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "19:45", "location": "Airbnb \u2014 San Marco", "note": "Arriving at the Airbnb", "date": "2026-06-18", "dayTitle": "Arrival", "color": "#7B9BAD", "photoCount": 7}, {"lat": 45.438, "lon": 12.336, "time": "10:00", "location": "Airbnb area", "note": "Morning start", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.435, "lon": 12.339, "time": "10:24", "location": "San Marco / Rialto area", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 6}, {"lat": 45.434, "lon": 12.338, "time": "11:37", "location": "San Marco / Rialto area", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 5}, {"lat": 45.435, "lon": 12.339, "time": "13:11", "location": "San Marco / Rialto area", "note": "Lunch area", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.434, "lon": 12.34, "time": "14:25", "location": "Castello / Eastern San Marco", "note": "", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "16:37", "location": "Airbnb area", "note": "Afternoon return", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.336, "time": "20:46", "location": "Airbnb area", "note": "Evening", "date": "2026-06-19", "dayTitle": "First Full Day", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.438, "lon": 12.336, "time": "11:10", "location": "Airbnb \u2014 morning departure", "note": "", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.486, "lon": 12.416, "time": "12:13", "location": "Burano Island", "note": "21 photos \u2014 peak of the trip so far", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 21}, {"lat": 45.485, "lon": 12.418, "time": "13:42", "location": "Burano Island", "note": "Late lunch, heading back", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "16:42", "location": "Venice \u2014 back in sestiere", "note": "", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 2}, {"lat": 45.444, "lon": 12.339, "time": "19:24", "location": "Castello area", "note": "Evening wander", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 1}, {"lat": 45.441, "lon": 12.339, "time": "20:53", "location": "Near Airbnb", "note": "Late evening", "date": "2026-06-20", "dayTitle": "Burano", "color": "#D4875A", "photoCount": 3}, {"lat": 45.438, "lon": 12.336, "time": "09:41", "location": "Airbnb \u2014 morning", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.432, "lon": 12.327, "time": "10:31", "location": "Dorsoduro / Accademia area", "note": "Long morning here", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 14}, {"lat": 45.431, "lon": 12.329, "time": "13:28", "location": "Dorsoduro \u2014 eastern edge", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.434, "lon": 12.332, "time": "13:38", "location": "San Polo / Rialto direction", "note": "Heading back", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.336, "time": "16:26", "location": "Near Airbnb", "note": "Afternoon", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.438, "lon": 12.337, "time": "16:44", "location": "Near Airbnb", "note": "", "date": "2026-06-21", "dayTitle": "Dorsoduro", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.431, "lon": 12.332, "time": "12:53", "location": "San Polo area", "note": "", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.431, "lon": 12.331, "time": "13:16", "location": "San Polo area", "note": "Long afternoon stop", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 16}, {"lat": 45.436, "lon": 12.33, "time": "18:23", "location": "Western Venice", "note": "Evening wander", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.434, "lon": 12.345, "time": "18:52", "location": "Castello \u2014 eastern canals", "note": "", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 3}, {"lat": 45.434, "lon": 12.344, "time": "20:18", "location": "Castello \u2014 eastern canals", "note": "Evening by the water", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.438, "lon": 12.334, "time": "20:52", "location": "Near Airbnb", "note": "Night", "date": "2026-06-22", "dayTitle": "Monday in Venice", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.334, "time": "12:20", "location": "Near Airbnb", "note": "Late morning start", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.436, "lon": 12.332, "time": "12:34", "location": "San Polo direction", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 2}, {"lat": 45.431, "lon": 12.328, "time": "12:58", "location": "Dorsoduro / San Polo", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 12}, {"lat": 45.438, "lon": 12.336, "time": "16:42", "location": "Near Airbnb \u2014 long stop", "note": "12 photos \u2014 significant moment", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 12}, {"lat": 45.438, "lon": 12.336, "time": "17:42", "location": "Airbnb area", "note": "", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 4}, {"lat": 45.44, "lon": 12.337, "time": "22:30", "location": "Night Venice \u2014 near Airbnb", "note": "Late night out", "date": "2026-06-23", "dayTitle": "The Long Afternoon", "color": "#8FAF8A", "photoCount": 1}, {"lat": 45.438, "lon": 12.336, "time": "09:27", "location": "Near Airbnb \u2014 morning golden hour", "note": "7 photos \u2014 anniversary morning", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 8}, {"lat": 45.437, "lon": 12.337, "time": "10:15", "location": "Morning walk", "note": "", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 4}, {"lat": 45.438, "lon": 12.336, "time": "12:16", "location": "Airbnb area \u2014 midday", "note": "", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 2}, {"lat": 45.434, "lon": 12.339, "time": "16:12", "location": "Near Caff\u00e8 Saraceno area", "note": "Pre-dinner, anniversary evening", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 3}, {"lat": 45.438, "lon": 12.336, "time": "18:51", "location": "Anniversary dinner \u2014 Caff\u00e8 Saraceno", "note": "Dinner reservation #4408, 7:15 PM", "date": "2026-06-24", "dayTitle": "Anniversary \u2014 20 Years", "color": "#C4788A", "photoCount": 3}, {"lat": 45.442, "lon": 12.317, "time": "12:21", "location": "Western Venice \u2014 train direction", "note": "Heading toward Santa Lucia station", "date": "2026-06-25", "dayTitle": "Last Morning", "color": "#9B8FAF", "photoCount": 2}, {"lat": 45.574, "lon": 12.364, "time": "13:05", "location": "Mainland \u2014 north of airport", "note": "Train north", "date": "2026-06-25", "dayTitle": "Last Morning", "color": "#9B8FAF", "photoCount": 2}, {"lat": 45.505, "lon": 12.341, "time": "08:31", "location": "Venice Marco Polo Airport area", "note": "Departure", "date": "2026-06-26", "dayTitle": "The Journey Home", "color": "#9B8FAF", "photoCount": 2}, {"lat": 49.003, "lon": 2.591, "time": "14:42", "location": "CDG Airport, Paris", "note": "Connecting home", "date": "2026-06-26", "dayTitle": "The Journey Home", "color": "#9B8FAF", "photoCount": 2}];
+const PHOTO_BASE='photos/';
 
-let lbPhotos = [], lbIndex = 0;
+var lbPhotos=[],lbIndex=0,lbCaption='';
+function openLightbox(photos,index,caption){lbPhotos=photos;lbIndex=index;lbCaption=caption||'';document.getElementById('lightbox').classList.add('open');updateLightbox();}
+function updateLightbox(){document.getElementById('lightbox-img').src=PHOTO_BASE+lbPhotos[lbIndex];document.getElementById('lightbox-caption').textContent=lbCaption+'  ('+(lbIndex+1)+' / '+lbPhotos.length+')';}
+function lightboxNav(dir,e){if(e)e.stopPropagation();lbIndex=(lbIndex+dir+lbPhotos.length)%lbPhotos.length;updateLightbox();}
+function closeLightbox(e){if(e&&(e.target.tagName==='IMG'||e.target.classList.contains('lightbox-nav')))return;document.getElementById('lightbox').classList.remove('open');document.getElementById('lightbox-img').src='';}
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='ArrowRight')lightboxNav(1);if(e.key==='ArrowLeft')lightboxNav(-1);if(e.key==='Escape')closeLightbox();});
 
-function openLightbox(photos, index, dayTitle) {
-  lbPhotos = photos;
-  lbIndex = index;
-  document.getElementById('lightbox').classList.add('open');
-  updateLightbox(dayTitle);
-}
-function updateLightbox(caption) {
-  const img = document.getElementById('lightbox-img');
-  img.src = PHOTO_BASE + lbPhotos[lbIndex];
-  document.getElementById('lightbox-caption').textContent =
-    (caption || '') + '  (' + (lbIndex+1) + ' / ' + lbPhotos.length + ')';
-}
-function lightboxNav(dir, e) {
-  if (e) e.stopPropagation();
-  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
-  const cap = document.getElementById('lightbox-caption').textContent.split('(')[0].trim();
-  updateLightbox(cap);
-}
-function closeLightbox(e) {
-  if (e && (e.target.tagName === 'IMG' || e.target.classList.contains('lightbox-nav'))) return;
-  document.getElementById('lightbox').classList.remove('open');
-  document.getElementById('lightbox-img').src = '';
-}
-document.addEventListener('keydown', e => {
-  if (!document.getElementById('lightbox').classList.contains('open')) return;
-  if (e.key === 'ArrowRight') lightboxNav(1);
-  if (e.key === 'ArrowLeft') lightboxNav(-1);
-  if (e.key === 'Escape') closeLightbox();
-});
+function showSection(id,btn){document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});document.getElementById(id).classList.add('active');btn.classList.add('active');if(id==='map-section'&&window._map)setTimeout(function(){window._map.invalidateSize();},50);}
 
-function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'map-section' && window._map) setTimeout(() => window._map.invalidateSize(), 50);
-}
+var map=L.map('map');window._map=map;
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',maxZoom:19}).addTo(map);
+POINTS.forEach(function(p){var el=document.createElement('div');el.className='custom-marker';el.style.background=p.color;var marker=L.marker([p.lat,p.lon],{icon:L.divIcon({html:el,className:'',iconSize:[12,12],iconAnchor:[6,6]})});marker.bindPopup('<div style="font-family:Inter,sans-serif;font-size:13px;min-width:170px"><div style="font-weight:500;margin-bottom:3px">'+p.location+'</div><div style="color:#888;font-size:11px">'+p.dayTitle+' &middot; '+p.time+'</div>'+(p.note?'<div style="margin-top:6px;font-style:italic;font-size:12px;color:#666">'+p.note+'</div>':'')+(p.photoCount>0?'<div style="margin-top:4px;font-size:11px;color:#888">'+p.photoCount+' photos</div>':'')+' </div>');marker.addTo(map);});
+var venicePts=POINTS.filter(function(p){return p.lat>44&&p.lat<46.2;});
+if(venicePts.length){var bounds=L.latLngBounds(venicePts.map(function(p){return[p.lat,p.lon];}));map.fitBounds(bounds,{padding:[48,48]});map.once('moveend',function(){map.setZoom(map.getZoom()+1);});}
 
-const map = L.map('map');
-window._map = map;
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-  maxZoom: 19
-}).addTo(map);
-
-POINTS.forEach(p => {
-  const el = document.createElement('div');
-  el.className = 'custom-marker';
-  el.style.background = p.color;
-  const marker = L.marker([p.lat, p.lon], {
-    icon: L.divIcon({ html: el, className: '', iconSize: [12,12], iconAnchor: [6,6] })
-  });
-  marker.bindPopup(
-    '<div style="font-family:Inter,sans-serif;font-size:13px;min-width:170px">' +
-    '<div style="font-weight:500;margin-bottom:3px">' + p.location + '</div>' +
-    '<div style="color:#888;font-size:11px">' + p.dayTitle + ' &middot; ' + p.time + '</div>' +
-    (p.note ? '<div style="margin-top:6px;font-style:italic;font-size:12px;color:#666">' + p.note + '</div>' : '') +
-    (p.photoCount > 0 ? '<div style="margin-top:4px;font-size:11px;color:#888">' + p.photoCount + ' photos</div>' : '') +
-    '</div>'
-  );
-  marker.addTo(map);
-});
-
-const venicePts = POINTS.filter(p => p.lat > 44 && p.lat < 46.2);
-if (venicePts.length) {
-  const bounds = L.latLngBounds(venicePts.map(p => [p.lat, p.lon]));
-  map.fitBounds(bounds, {padding: [48, 48]});
-  // Zoom in one extra level, centered on Venice proper
-  map.once('moveend', function() { map.setZoom(map.getZoom() + 1); });
-}
-
-// STORY CARDS
-const cardWrap = document.getElementById('day-cards');
-DAYS.forEach((day, i) => {
-  let thumbHtml;
-  if (day.heroKyle && day.heroSarah) {
-    thumbHtml = '<div class="thumb-pair">' +
-      '<img src="' + PHOTO_BASE + day.heroKyle + '" loading="lazy" alt="">' +
-      '<img src="' + PHOTO_BASE + day.heroSarah + '" loading="lazy" alt="">' +
-      '</div>';
-  } else if (day.heroKyle) {
-    thumbHtml = '<div class="thumb-single"><img src="' + PHOTO_BASE + day.heroKyle + '" loading="lazy" alt=""></div>';
-  } else if (day.heroSarah) {
-    thumbHtml = '<div class="thumb-single"><img src="' + PHOTO_BASE + day.heroSarah + '" loading="lazy" alt=""></div>';
-  } else {
-    thumbHtml = '<div class="thumb-empty">✈</div>';
-  }
-
-  // Build photo lookup for this day: match photos to stops by hour
-  var dayPhotos = day.photos || [];
-
-  const stopsHtml = day.stops.map(function(s, si) {
-    var stopId = 'stop-' + i + '-' + si;
-    // Match photos roughly to this stop by time (photos within ~1hr window)
-    var stopHour = parseInt(s.time.split(':')[0], 10);
-    var stopPhotos = dayPhotos.filter(function(fname) {
-      // Use all day photos — we can't filter by time without per-photo timestamps here,
-      // so show all day photos in each stop's strip as a browseable reference
-      return true;
-    });
-
-    var photoStrip = '';
-    if (day.photos && day.photos.length > 0) {
-      photoStrip = '<div class="stop-photo-strip">';
-      day.photos.forEach(function(fname, fi) {
-        photoStrip += '<img src="' + PHOTO_BASE + fname + '" loading="lazy" alt="" ' +
-          'onclick="openLightbox(' + JSON.stringify(day.photos) + ', ' + fi + ', \'' + (day.label + ' — ' + s.location).replace(/'/g, '') + '\')">';
+var cardWrap=document.getElementById('day-cards');
+DAYS.forEach(function(day,i){
+  var stopsHtml = day.stops.map(function(s,si){
+    var stopId='stop-'+i+'-'+si;
+    var cnt=s.photos?s.photos.length:0;
+    var photoStrip='';
+    if(cnt>0){
+      photoStrip='<div class="stop-photo-strip" data-day="'+i+'" data-stop="'+si+'">';
+      s.photos.forEach(function(fname,fi){
+        photoStrip+='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="" data-idx="'+fi+'">';
       });
-      photoStrip += '</div>';
+      photoStrip+='</div>';
     } else {
-      photoStrip = '<p class="stop-no-photos">No photos tagged to this stop yet.</p>';
+      photoStrip='<p class="stop-no-photos">No photos at this stop.</p>';
     }
+    var stopDiv = document.createElement('div');
+    stopDiv.className = 'stop-row';
 
-    return '<div class="stop-row">' +
-      '<div class="stop-header" onclick="toggleStop(\'' + stopId + '\')">' +
-        '<span class="stop-time">' + s.time + '</span>' +
-        '<span class="stop-location">' + s.location + '</span>' +
-        '<span class="stop-note">' + (s.note || '') + '</span>' +
-        '<span class="stop-count">' + (s.photoCount > 0 ? s.photoCount + ' 📷' : '') + '</span>' +
-        '<span class="stop-chevron" id="chev-' + stopId + '">▾</span>' +
-      '</div>' +
-      '<div class="stop-detail" id="' + stopId + '">' + photoStrip + '</div>' +
-    '</div>';
-  }).join('');
+    var stopHeader = document.createElement('div');
+    stopHeader.className = 'stop-header';
+    stopHeader.innerHTML =
+      '<span class="stop-time">'+s.time+'</span>'+
+      '<span class="stop-location">'+s.location+'</span>'+
+      '<span class="stop-note">'+(s.note||'')+'</span>'+
+      '<span class="stop-count">'+(cnt>0?cnt+' photos':'')+'</span>'+
+      '<span class="stop-chevron" id="chev-'+stopId+'">\u25be</span>';
+    stopHeader.addEventListener('click', (function(sid){ return function(){ toggleStop(sid); }; })(stopId));
 
-  const photoLine = 'Kyle: ' + day.kyleCount + (day.sarahCount ? ' · Sarah: ' + day.sarahCount : '');
+    var stopDetail = document.createElement('div');
+    stopDetail.className = 'stop-detail';
+    stopDetail.id = stopId;
+    stopDetail.innerHTML = photoStrip;
 
-  const card = document.createElement('div');
+    stopDiv.appendChild(stopHeader);
+    stopDiv.appendChild(stopDetail);
+    return stopDiv;
+  });
+
+  var card = document.createElement('div');
   card.className = 'day-card';
-  card.innerHTML =
-    '<div class="day-card-header" onclick="toggleStops(' + i + ')">' +
-      thumbHtml +
-      '<div class="day-info">' +
-        '<span class="day-theme-tag" style="background:' + day.themeColor + '">' + day.themeLabel + '</span>' +
-        '<div class="day-label">' + day.label + '</div>' +
-        '<div class="day-title">' + day.title + '</div>' +
-        '<div class="day-summary">' + day.summary + '</div>' +
-        '<div class="day-meta">' + photoLine + ' &nbsp;&middot;&nbsp; ' + day.stops.length + ' stops</div>' +
-        '<div class="expand-hint" id="hint-' + i + '">▾ expand</div>' +
-      '</div>' +
-    '</div>' +
-    '<div class="day-stops" id="stops-' + i + '">' + stopsHtml + '</div>';
+
+  var cardHeader = document.createElement('div');
+  cardHeader.className = 'day-card-header';
+  var thumbEl = document.createElement('div');
+  if(day.heroKyle && day.heroSarah){
+    thumbEl.className='thumb-pair';
+    thumbEl.innerHTML='<img src="'+PHOTO_BASE+day.heroKyle+'" loading="lazy" alt=""><img src="'+PHOTO_BASE+day.heroSarah+'" loading="lazy" alt="">';
+  } else if(day.heroKyle){
+    thumbEl.className='thumb-single';
+    thumbEl.innerHTML='<img src="'+PHOTO_BASE+day.heroKyle+'" loading="lazy" alt="">';
+  } else {
+    thumbEl.className='thumb-empty';
+    thumbEl.textContent='\u2708';
+  }
+  var infoEl = document.createElement('div');
+  infoEl.className = 'day-info';
+  infoEl.innerHTML =
+    '<span class="day-theme-tag" style="background:'+day.themeColor+'">'+day.themeLabel+'</span>'+
+    '<div class="day-label">'+day.label+'</div>'+
+    '<div class="day-title">'+day.title+'</div>'+
+    '<div class="day-summary">'+day.summary+'</div>'+
+    '<div class="day-meta">'+day.totalPhotos+' photos &nbsp;&middot;&nbsp; '+day.stops.length+' stops</div>'+
+    '<div class="expand-hint" id="hint-'+i+'">\u25be expand</div>';
+  cardHeader.appendChild(thumbEl);
+  cardHeader.appendChild(infoEl);
+  cardHeader.addEventListener('click', (function(idx){ return function(){ toggleStops(idx); }; })(i));
+
+  var stopsContainer = document.createElement('div');
+  stopsContainer.className = 'day-stops';
+  stopsContainer.id = 'stops-'+i;
+  stopsHtml.forEach(function(el){ stopsContainer.appendChild(el); });
+
+  card.appendChild(cardHeader);
+  card.appendChild(stopsContainer);
   cardWrap.appendChild(card);
 });
 
-function toggleStops(i) {
-  const el = document.getElementById('stops-' + i);
-  const hint = document.getElementById('hint-' + i);
-  el.classList.toggle('open');
-  hint.textContent = el.classList.contains('open') ? '▴ collapse' : '▾ expand';
-}
+// Delegated click handler for stop photo strips
+document.getElementById('day-cards').addEventListener('click', function(e) {
+  var img = e.target.closest('.stop-photo-strip img');
+  if (!img) return;
+  var strip = img.closest('.stop-photo-strip');
+  var dayIdx = parseInt(strip.getAttribute('data-day'), 10);
+  var stopIdx = parseInt(strip.getAttribute('data-stop'), 10);
+  var photoIdx = parseInt(img.getAttribute('data-idx'), 10);
+  var day = DAYS[dayIdx];
+  var stop = day.stops[stopIdx];
+  var cap = day.label + ' ' + stop.time + ' \u2014 ' + stop.location;
+  openLightbox(stop.photos, photoIdx, cap);
+});
 
-function toggleStop(id) {
-  const detail = document.getElementById(id);
-  const chev = document.getElementById('chev-' + id);
-  if (!detail) return;
-  const isOpen = detail.classList.toggle('open');
-  if (chev) {
-    chev.textContent = isOpen ? '▴' : '▾';
-    chev.classList.toggle('open', isOpen);
-  }
-}
+function toggleStops(i){var el=document.getElementById('stops-'+i);var hint=document.getElementById('hint-'+i);el.classList.toggle('open');hint.textContent=el.classList.contains('open')?'▴ collapse':'▾ expand';}
+function toggleStop(id){var detail=document.getElementById(id);var chev=document.getElementById('chev-'+id);if(!detail)return;var isOpen=detail.classList.toggle('open');if(chev){chev.textContent=isOpen?'▴':'▾';chev.classList.toggle('open',isOpen);}}
 
-// GALLERY with lightbox
-const galleryWrap = document.getElementById('gallery-grid-wrap');
-DAYS.forEach(day => {
-  if (!day.photos || !day.photos.length) return;
-  const block = document.createElement('div');
-  block.className = 'day-gallery-block';
-  block.innerHTML = '<div class="day-gallery-label">' + day.label + ' &mdash; ' + day.title + '</div>';
-  const grid = document.createElement('div');
-  grid.className = 'gallery-grid';
-  day.photos.forEach((fname, idx) => {
-    const cell = document.createElement('div');
-    cell.className = 'gallery-cell';
-    cell.innerHTML = '<img src="' + PHOTO_BASE + fname + '" loading="lazy" alt="">';
-    cell.addEventListener('click', () => openLightbox(day.photos, idx, day.label + ' — ' + day.title));
+var galleryWrap=document.getElementById('gallery-grid-wrap');
+DAYS.forEach(function(day){
+  if(!day.allPhotos||!day.allPhotos.length)return;
+  var block=document.createElement('div');block.className='day-gallery-block';
+  block.innerHTML='<div class="day-gallery-label">'+day.label+' &mdash; '+day.title+'</div>';
+  var grid=document.createElement('div');grid.className='gallery-grid';
+  day.allPhotos.forEach(function(fname,idx){
+    var cell=document.createElement('div');cell.className='gallery-cell';
+    cell.innerHTML='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="">';
+    cell.addEventListener('click',function(){openLightbox(day.allPhotos,idx,day.label+' — '+day.title);});
     grid.appendChild(cell);
   });
-  block.appendChild(grid);
-  galleryWrap.appendChild(block);
+  block.appendChild(grid);galleryWrap.appendChild(block);
 });
-</script>
-</body>
-</html>
+</script></body></html>
