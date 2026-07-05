@@ -773,6 +773,7 @@ footer { text-align: center; padding: 32px; font-size: 11px; color: var(--muted)
   <button class="nav-btn active" onclick="showSection('map-section', this)">Map</button>
   <button class="nav-btn" onclick="showSection('story-section', this)">Story</button>
   <button class="nav-btn" onclick="showSection('gallery-section', this)">Gallery</button>
+  <button class="nav-btn" onclick="showSection('about-section', this)">About</button>
 </nav>
 
 <div id="map-section" class="section active"><div id="map"></div></div>
@@ -797,7 +798,39 @@ footer { text-align: center; padding: 32px; font-size: 11px; color: var(--muted)
   <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary</footer>
+<div id="about-section" class="section">
+  <div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
+    <p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.0</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
+    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map of every stop plotted by GPS, a day-by-day story timeline with expandable stop details, and a full photo gallery with lightbox. Built to share via GitHub Pages and AirPlay to a TV.</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">File structure</h2>
+    <p style="font-size:14px;line-height:1.75;margin-bottom:8px;font-family:monospace;background:#f0ede8;padding:14px 18px;border-radius:8px;">venice-2026/<br>&nbsp;&nbsp;index.html &nbsp;&nbsp;&larr; this file<br>&nbsp;&nbsp;photos/ &nbsp;&nbsp;&nbsp;&nbsp;&larr; 181 .jpg files, flat (no subfolders)</p>
+    <p style="font-size:13px;color:#8a8178;margin-bottom:28px;">Photos are referenced as <code>photos/FILENAME.jpg</code>. All source HEIC and JPG files were converted to JPEG at 1800px max, quality 82, via pillow-heif.</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Photo sources</h2>
+    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">158 photos from Kyle's iPhone (IMG_1xxx, IMG_52xx HEIC series) &middot; 22 photos from Sarah's iPhone (IMG_5xxx JPG series, Venice Sarah folder) &middot; 180 total after deduplication. Story cards show a split thumbnail where both cameras captured the same day. GPS was present on all but one photo; ~22 photos near the Airbnb had GPS drift (~580m) and were corrected to the confirmed Airbnb coordinate (45.438, 12.336).</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Tech stack</h2>
+    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Single HTML file &middot; Leaflet 1.9.4 (inlined, no CDN dependency) &middot; OpenStreetMap tiles &middot; Google Fonts (Playfair Display + Inter) &middot; No framework, no build step &middot; Photos served as static files alongside HTML &middot; GitHub Pages hosting</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Known location gaps</h2>
+    <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Several location labels are approximate (San Marco / Rialto area, San Polo area, Dorsoduro area) pending Kyle confirming exact spots from clusters B&ndash;F identified during EXIF analysis. Jun 25 departure stop labeled "north of airport via train" based on GPS coordinates north of Marco Polo airport on the mainland &mdash; not Murano as initially assumed.</p>
+
+    <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;margin-top:8px;">Changelog</h2>
+    <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
+      <p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map with GPS-plotted stops, story timeline with dual thumbnails (Kyle + Sarah), full gallery with lightbox, About tab. 180 photos across both cameras, all converted to JPEG for universal browser compatibility. GPS drift corrected for Airbnb cluster.</p>
+    </div>
+
+    <div style="margin-top:40px;padding:20px 24px;background:#f0ede8;border-radius:10px;font-size:13px;line-height:1.75;color:#5b5550;">
+      <strong style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Note to future Claude</strong><br>
+      Read this tab first. The full build context lives in the Venice storyboard conversation thread (search "Venice storyboard" in past chats). Photo files live in <code>photos/</code> alongside this HTML. Timeline data, EXIF, and geocoding are in <code>/home/claude/</code> on the build machine but won't persist &mdash; the source of truth is this file and the photos folder. When adding narrative captions, edit the <code>DAYS</code> JS array <code>summary</code> fields directly. Location labels B&ndash;F in the timeline are still approximate &mdash; ask Kyle to confirm. Version bump the changelog above with each meaningful change.
+    </div>
+  </div>
+</div>
+
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.0</span></footer>
 
 <script>
 /* @preserve
