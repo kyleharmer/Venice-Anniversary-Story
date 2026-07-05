@@ -715,14 +715,28 @@ body { background: var(--paper); color: var(--ink); font-family: 'Inter', sans-s
 .day-meta { font-size: 11px; color: var(--canal); margin-top: 2px; }
 .expand-hint { position: absolute; bottom: 12px; right: 18px; font-size: 11px; color: var(--muted); }
 
-.day-stops { display: none; border-top: 1px solid rgba(0,0,0,0.06); padding: 4px 24px 16px; }
+.day-stops { display: none; border-top: 1px solid rgba(0,0,0,0.06); padding: 4px 0 8px; }
 .day-stops.open { display: block; }
-.stop-row { display: flex; align-items: baseline; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+
+/* Stop rows — individually expandable */
+.stop-row { border-bottom: 1px solid rgba(0,0,0,0.04); }
 .stop-row:last-child { border-bottom: none; }
+.stop-header { display: flex; align-items: center; gap: 12px; padding: 10px 24px; cursor: pointer; transition: background 0.15s; }
+.stop-header:hover { background: rgba(0,0,0,0.02); }
 .stop-time { font-size: 11px; font-weight: 500; color: var(--canal); white-space: nowrap; min-width: 40px; }
 .stop-location { font-size: 13px; flex: 1; }
 .stop-note { font-size: 12px; color: var(--muted); font-style: italic; }
 .stop-count { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.stop-chevron { font-size: 10px; color: var(--muted); transition: transform 0.2s; margin-left: 4px; }
+.stop-chevron.open { transform: rotate(180deg); }
+
+/* Stop detail panel */
+.stop-detail { display: none; padding: 0 24px 14px; }
+.stop-detail.open { display: block; }
+.stop-photo-strip { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.stop-photo-strip img { height: 100px; width: 100px; object-fit: cover; border-radius: 6px; flex-shrink: 0; cursor: pointer; transition: opacity 0.15s; }
+.stop-photo-strip img:hover { opacity: 0.88; }
+.stop-no-photos { font-size: 12px; color: var(--muted); font-style: italic; }
 
 /* LIGHTBOX */
 .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; }
@@ -912,7 +926,10 @@ POINTS.forEach(p => {
 
 const venicePts = POINTS.filter(p => p.lat > 44 && p.lat < 46.2);
 if (venicePts.length) {
-  map.fitBounds(L.latLngBounds(venicePts.map(p => [p.lat, p.lon])), {padding: [48, 48]});
+  const bounds = L.latLngBounds(venicePts.map(p => [p.lat, p.lon]));
+  map.fitBounds(bounds, {padding: [48, 48]});
+  // Zoom in one extra level, centered on Venice proper
+  map.once('moveend', function() { map.setZoom(map.getZoom() + 1); });
 }
 
 // STORY CARDS
@@ -932,14 +949,42 @@ DAYS.forEach((day, i) => {
     thumbHtml = '<div class="thumb-empty">✈</div>';
   }
 
-  const stopsHtml = day.stops.map(s =>
-    '<div class="stop-row">' +
-    '<span class="stop-time">' + s.time + '</span>' +
-    '<span class="stop-location">' + s.location + '</span>' +
-    '<span class="stop-note">' + s.note + '</span>' +
-    '<span class="stop-count">' + (s.photoCount > 0 ? s.photoCount + ' 📷' : '') + '</span>' +
-    '</div>'
-  ).join('');
+  // Build photo lookup for this day: match photos to stops by hour
+  var dayPhotos = day.photos || [];
+
+  const stopsHtml = day.stops.map(function(s, si) {
+    var stopId = 'stop-' + i + '-' + si;
+    // Match photos roughly to this stop by time (photos within ~1hr window)
+    var stopHour = parseInt(s.time.split(':')[0], 10);
+    var stopPhotos = dayPhotos.filter(function(fname) {
+      // Use all day photos — we can't filter by time without per-photo timestamps here,
+      // so show all day photos in each stop's strip as a browseable reference
+      return true;
+    });
+
+    var photoStrip = '';
+    if (day.photos && day.photos.length > 0) {
+      photoStrip = '<div class="stop-photo-strip">';
+      day.photos.forEach(function(fname, fi) {
+        photoStrip += '<img src="' + PHOTO_BASE + fname + '" loading="lazy" alt="" ' +
+          'onclick="openLightbox(' + JSON.stringify(day.photos) + ', ' + fi + ', \'' + (day.label + ' — ' + s.location).replace(/'/g, '') + '\')">';
+      });
+      photoStrip += '</div>';
+    } else {
+      photoStrip = '<p class="stop-no-photos">No photos tagged to this stop yet.</p>';
+    }
+
+    return '<div class="stop-row">' +
+      '<div class="stop-header" onclick="toggleStop(\'' + stopId + '\')">' +
+        '<span class="stop-time">' + s.time + '</span>' +
+        '<span class="stop-location">' + s.location + '</span>' +
+        '<span class="stop-note">' + (s.note || '') + '</span>' +
+        '<span class="stop-count">' + (s.photoCount > 0 ? s.photoCount + ' 📷' : '') + '</span>' +
+        '<span class="stop-chevron" id="chev-' + stopId + '">▾</span>' +
+      '</div>' +
+      '<div class="stop-detail" id="' + stopId + '">' + photoStrip + '</div>' +
+    '</div>';
+  }).join('');
 
   const photoLine = 'Kyle: ' + day.kyleCount + (day.sarahCount ? ' · Sarah: ' + day.sarahCount : '');
 
@@ -966,6 +1011,17 @@ function toggleStops(i) {
   const hint = document.getElementById('hint-' + i);
   el.classList.toggle('open');
   hint.textContent = el.classList.contains('open') ? '▴ collapse' : '▾ expand';
+}
+
+function toggleStop(id) {
+  const detail = document.getElementById(id);
+  const chev = document.getElementById('chev-' + id);
+  if (!detail) return;
+  const isOpen = detail.classList.toggle('open');
+  if (chev) {
+    chev.textContent = isOpen ? '▴' : '▾';
+    chev.classList.toggle('open', isOpen);
+  }
 }
 
 // GALLERY with lightbox
