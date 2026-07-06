@@ -750,15 +750,30 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 .hero-audio{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:32px;padding:14px 24px;background:rgba(255,255,255,0.06);border:1px solid rgba(200,169,110,0.25);border-radius:40px;max-width:480px;margin-left:auto;margin-right:auto;}
 .hero-audio-label{font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--warm);white-space:nowrap;}
 .hero-audio audio{flex:1;height:28px;min-width:0;opacity:0.85;}
-@media(max-width:600px){.day-card-header{grid-template-columns:120px 1fr;}.thumb-pair,.thumb-single,.thumb-empty{height:130px;}.hero-stats{gap:20px;}.nav-btn{padding:14px 12px;font-size:11px;}.hero-audio{flex-direction:column;border-radius:16px;gap:8px;}}
+
+/* Hero stats — purposeful portrait wrap */
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;}
+.hero-stats-anniversary{display:none;}
+@media(max-width:600px){
+  .hero-stats{grid-template-columns:repeat(3,1fr);gap:12px;}
+  .stat-anniversary{grid-column:1/-1;margin-top:4px;border-top:1px solid rgba(200,169,110,0.2);padding-top:16px;}
+  .stat-anniversary .stat-num{font-size:2.4rem;}
+  .day-card-header{grid-template-columns:120px 1fr;}
+  .thumb-pair,.thumb-single,.thumb-empty{height:130px;}
+  .nav-btn{padding:14px 12px;font-size:11px;}
+  .hero-audio{flex-direction:column;border-radius:16px;gap:8px;}
+  /* Gallery — smaller thumbnails on mobile */
+  .gallery-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:3px;}
+  .gallery-cell{border-radius:3px;}
+}
 </style></head><body>
-<div class="hero"><div class="hero-eyebrow">20th Anniversary &middot; June 2026</div><h1>Kyle &amp; Sarah<br>in <em>Venezia</em></h1><div class="hero-sub">June 18 &ndash; 25, 2026 &nbsp;&middot;&nbsp; Eight Days on the Islands</div><div class="hero-stats"><div class="stat"><span class="stat-num">8</span><span class="stat-label">Days in Venice</span></div><div class="stat"><span class="stat-num">180</span><span class="stat-label">Photos</span></div><div class="stat"><span class="stat-num">46</span><span class="stat-label">Stops</span></div><div class="stat"><span class="stat-num">20</span><span class="stat-label">Years Together</span></div></div><div class="hero-audio"><span class="hero-audio-label">&#9835; Vivaldi &middot; Four Seasons</span><audio id="vivaldi-player" controls preload="none"><source src="4seasons.mp3" type="audio/mpeg">Your browser does not support audio.</audio></div></div>
+<div class="hero"><div class="hero-eyebrow">20th Anniversary &middot; June 2026</div><h1>Kyle &amp; Sarah<br>in <em>Venezia</em></h1><div class="hero-sub">June 18 &ndash; 25, 2026 &nbsp;&middot;&nbsp; Eight Days on the Islands</div><div class="hero-stats"><div class="stat"><span class="stat-num">8</span><span class="stat-label">Days in Venice</span></div><div class="stat"><span class="stat-num">180</span><span class="stat-label">Photos</span></div><div class="stat"><span class="stat-num">46</span><span class="stat-label">Stops</span></div><div class="stat stat-anniversary"><span class="stat-num">20</span><span class="stat-label">Years Together</span></div></div><div class="hero-audio"><span class="hero-audio-label">&#9835; Vivaldi &middot; Four Seasons</span><audio id="vivaldi-player" controls preload="none" playsinline><source src="4seasons.mp3" type="audio/mpeg">Your browser does not support audio.</audio></div></div>
 <nav class="nav"><button class="nav-btn active" onclick="showSection('map-section',this)">Map</button><button class="nav-btn" onclick="showSection('story-section',this)">Story</button><button class="nav-btn" onclick="showSection('gallery-section',this)">Gallery</button><button class="nav-btn" onclick="showSection('about-section',this)">About</button></nav>
 <div id="map-section" class="section active"><div id="map"></div></div>
 <div id="story-section" class="section"><div class="timeline-wrap"><p class="section-heading">The journey, day by day &mdash; tap a card to expand stops, tap a stop to see its photos</p><div id="day-cards"></div></div></div>
 <div id="gallery-section" class="section"><div class="gallery-wrap"><p class="section-heading">Memories, organized by day</p><div id="gallery-grid-wrap"></div></div></div>
 <div id="about-section" class="section"><div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
-<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.1.0</p>
+<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.1.1</p>
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
 <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map with GPS-plotted stops and photo popups, a day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox. Built as a single HTML file + photos folder for GitHub Pages, shareable by link, AirPlay-friendly on a TV.</p>
 
@@ -780,6 +795,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Changelog</h2>
 <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
+<p style="margin-bottom:10px;"><strong>v1.1.1</strong> &mdash; July 6, 2026<br>Hero stats: 3-up grid on mobile with 20 Years spanning full width as a featured row. Gallery thumbnails smaller on mobile (~90px, 4+ per row). iOS audio fix: added playsinline attribute; Monday card expand pulses the player bar instead of auto-playing (Safari blocks autoplay without direct tap).</p>
 <p style="margin-bottom:10px;"><strong>v1.1.0</strong> &mdash; July 6, 2026<br>Fixed audio filename to 4seasons.mp3 (was 4season.mp3).</p>
 <p style="margin-bottom:10px;"><strong>v1.0.9</strong> &mdash; July 6, 2026<br>Vivaldi Four Seasons audio player moved to hero header — always visible and playable from any tab. Auto-plays when Monday card is expanded in Story. Vivaldi stops show a nudge pointing to the header player. Place 4seasons.mp3 in repo root alongside index.html.</p>
 <p style="margin-bottom:10px;"><strong>v1.0.8</strong> &mdash; July 6, 2026<br>Jun 22 hero thumbnails now show two different images. Castello stops corrected to Chiesa di San Vidal / Vivaldi's church. Audio player added for bootleg Four Seasons recording (4seasons.mp3 in repo root).</p>
@@ -809,7 +825,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <strong>Photo note:</strong> photos.zip contains 181 JPEGs. Kyle extracts into <code>photos/</code> alongside index.html. HEIC files from the original camera roll will NOT render in Chrome &mdash; only the converted JPEGs work.
 </div></div></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><span class="lightbox-close" onclick="closeLightbox()">&times;</span><span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">&#8249;</span><img id="lightbox-img" src="" alt=""><span class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">&#8250;</span><div class="lightbox-caption" id="lightbox-caption"></div></div>
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.1.0</span></footer>
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.1.1</span></footer>
 <script>
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
@@ -1014,10 +1030,20 @@ function toggleStops(i){
   var hint=document.getElementById('hint-'+i);
   el.classList.toggle('open');
   hint.textContent=el.classList.contains('open')?'\u25b4 collapse':'\u25be expand';
-  // Auto-play Vivaldi when Monday (Jun 22) card expands
+  // When Monday (Jun 22) expands, scroll player into view and pulse it
   if(el.classList.contains('open') && DAYS[i] && DAYS[i].date==='2026-06-22'){
     var player=document.getElementById('vivaldi-player');
-    if(player){ player.play().catch(function(){}); }
+    if(player){
+      // Try play (works on desktop/Android; Safari requires direct tap)
+      player.play().catch(function(){});
+      // Pulse the hero audio bar to draw attention on iOS
+      var bar=player.closest('.hero-audio');
+      if(bar){
+        bar.style.transition='box-shadow 0.3s';
+        bar.style.boxShadow='0 0 0 3px rgba(200,169,110,0.6)';
+        setTimeout(function(){ bar.style.boxShadow=''; }, 1200);
+      }
+    }
   }
 }
 function toggleStop(id){var detail=document.getElementById(id);var chev=document.getElementById('chev-'+id);if(!detail)return;var isOpen=detail.classList.toggle('open');if(chev){chev.textContent=isOpen?'▴':'▾';chev.classList.toggle('open',isOpen);}}
