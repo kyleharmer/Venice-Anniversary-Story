@@ -750,26 +750,50 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <div id="story-section" class="section"><div class="timeline-wrap"><p class="section-heading">The journey, day by day &mdash; tap a card to expand stops, tap a stop to see its photos</p><div id="day-cards"></div></div></div>
 <div id="gallery-section" class="section"><div class="gallery-wrap"><p class="section-heading">Memories, organized by day</p><div id="gallery-grid-wrap"></div></div></div>
 <div id="about-section" class="section"><div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
-<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.1</p>
+<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.2</p>
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
-<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Map of every GPS stop, day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox.</p>
-<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">File structure</h2>
-<p style="font-size:14px;line-height:1.75;margin-bottom:8px;font-family:monospace;background:#f0ede8;padding:14px 18px;border-radius:8px;">venice-2026/<br>&nbsp;&nbsp;index.html<br>&nbsp;&nbsp;photos/ &nbsp;&larr; 181 .jpg files, flat</p>
-<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Photo sources</h2>
-<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">158 from Kyle (IMG_1xxx HEIC) + 22 from Sarah (IMG_5xxx JPG) = 180 total. Each stop shows only photos from its time window, matched by EXIF timestamp.</p>
-<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Known gaps</h2>
-<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Several location labels approximate. Day summaries are placeholder text. Jun 25 stop is mainland north of airport, not Murano.</p>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map with GPS-plotted stops and photo popups, a day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox. Built as a single HTML file + photos folder for GitHub Pages, shareable by link, AirPlay-friendly on a TV.</p>
+
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">File &amp; deployment structure</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:8px;font-family:monospace;background:#f0ede8;padding:14px 18px;border-radius:8px;">venice-2026/<br>&nbsp;&nbsp;index.html &nbsp;&nbsp;&larr; this file (single self-contained HTML)<br>&nbsp;&nbsp;photos/ &nbsp;&nbsp;&nbsp;&nbsp;&larr; 181 .jpg files, flat folder, no subfolders</p>
+<p style="font-size:13px;color:#8a8178;margin-bottom:28px;">Photos are referenced as <code>photos/FILENAME.jpg</code>. Replace <code>index.html</code> in the repo root to update the app. Repo: <strong>venice-2026</strong>, branch: <strong>main</strong>, GitHub Pages: root of main. To confirm a push landed, check the version badge in the footer matches what you just uploaded.</p>
+
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Photo sources &amp; conversion</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">158 photos from Kyle&rsquo;s iPhone (IMG_1xxx and IMG_52xx series, originally HEIC) + 22 photos from Sarah&rsquo;s iPhone (IMG_5xxx series, originally JPG) = 180 total after deduplication. All converted to JPEG at 1800px max / quality 82 via pillow-heif. Each stop shows only photos taken during its time window, assigned by EXIF timestamp. ~22 Kyle photos near the Airbnb had GPS drift (~580m) and were corrected to the confirmed coordinate 45.438, 12.336.</p>
+
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Architecture</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Single HTML file &middot; Leaflet 1.9.4 (fully inlined, no CDN dependency) &middot; OpenStreetMap tiles &middot; Google Fonts (Playfair Display + Inter) &middot; No framework, no build step, no external scripts. All data (DAYS array, POINTS array) is embedded as JSON in the script block. Photo assignments are baked in at build time from <code>photo_assignments.json</code>. The build machine (Claude&rsquo;s container) holds source files; this HTML is the output.</p>
+
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Narrative strategy</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;"><strong>Map</strong> = spatial narrative. Popups show location, time, a note, and that stop&rsquo;s photos. Brief captions, location-aware. <strong>Story</strong> = temporal narrative. Day cards show the emotional arc of the day; stop rows expand to show photos for that stop. This is where fuller writing goes. <strong>Gallery</strong> = full archive. All 180 photos by day, no captions, deliberately minimal so it doesn&rsquo;t compete. To add narrative: edit the <code>summary</code> field on each day in the DAYS array, and/or the <code>note</code> field on each stop.</p>
+
+<h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Known gaps &amp; pending work</h2>
+<p style="font-size:14px;line-height:1.75;margin-bottom:28px;">Location labels for clusters B&ndash;F are approximate (guessed as &ldquo;San Marco / Rialto area&rdquo;, &ldquo;Dorsoduro&rdquo;, etc.) &mdash; Kyle needs to confirm these from the actual EXIF GPS clusters. Day summaries in the Story cards are placeholder text &mdash; replace with real narrative once Kyle has reviewed each day. Jun 25 departure stop is labeled &ldquo;mainland north of airport via train&rdquo; &mdash; GPS puts it on the mainland north of Marco Polo, not Murano as initially assumed. No stops have personal caption text yet beyond the location name.</p>
+
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Changelog</h2>
 <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
-<p style="margin-bottom:10px;"><strong>v1.0.1</strong> &mdash; July 5, 2026<br>Per-stop photo assignment by EXIF timestamp (each stop shows only its own photos). Map starts one zoom level closer. Version badge in footer.</p>
-<p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map, story, gallery, About. 180 photos across both cameras.</p>
+<p style="margin-bottom:10px;"><strong>v1.0.2</strong> &mdash; July 5, 2026<br>Map markers now open rich DOM-based popups with location, time, note, and scrollable photo strip for that stop&rsquo;s photos (tap any photo to open lightbox). POINTS array updated with day/stop indices (di, si) to power the stop lookup. About tab expanded with full handoff documentation. Version badge present in footer for push verification.</p>
+<p style="margin-bottom:10px;"><strong>v1.0.1</strong> &mdash; July 5, 2026<br>Per-stop photo assignment by EXIF timestamp &mdash; each stop now shows only its own photos, not all day photos. Map starts one zoom level closer after fitBounds. Stop rows individually expandable in Story tab. Version badge added to footer.</p>
+<p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map with GPS-plotted stops, story timeline with expandable day cards and dual Kyle/Sarah thumbnails, full gallery with lightbox, About tab. 180 photos across both cameras, all converted from HEIC/JPG to JPEG for universal browser compatibility.</p>
 </div>
+
 <div style="margin-top:40px;padding:20px 24px;background:#f0ede8;border-radius:10px;font-size:13px;line-height:1.75;color:#5b5550;">
-<strong style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Note to future Claude</strong><br>
-Read this tab first. Timeline in timeline.json, photo assignments in photo_assignments.json on build machine. Edit DAYS JS array summary fields for narrative. Location labels B-F still approximate. Bump changelog with each change.
+<strong style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;">Note to future Claude</strong><br><br>
+<strong>Start here.</strong> This is a single-file HTML storyboard for Kyle &amp; Sarah&rsquo;s Venice anniversary trip. The full build history lives in the Venice storyboard conversation thread &mdash; search &ldquo;Venice storyboard&rdquo; in past chats to find it. Read the compacted summary at the top of that thread before making changes.<br><br>
+<strong>Build machine files</strong> (in Claude&rsquo;s container, may not persist between sessions):<br>
+&bull; <code>/home/claude/timeline.json</code> &mdash; 10 days, 46 stops, GPS coords, location labels<br>
+&bull; <code>/home/claude/photo_assignments.json</code> &mdash; per-stop photo filename lists keyed by date<br>
+&bull; <code>/home/claude/all_photos.json</code> &mdash; merged Kyle + Sarah photo list with EXIF datetimes<br>
+&bull; <code>/home/claude/photos_converted/</code> &mdash; 181 converted JPEGs (source for photos.zip)<br>
+&bull; <code>/home/claude/node_modules/leaflet/</code> &mdash; Leaflet 1.9.4 source for inlining<br><br>
+<strong>How the build works:</strong> Python reads timeline.json + photo_assignments.json, builds the DAYS and POINTS JSON arrays, then writes a complete HTML file with everything inlined. The rebuild script is in the conversation thread. When files are missing from the build machine, ask Kyle to re-upload the source zips or reconstruct from the DAYS/POINTS data already embedded in this file.<br><br>
+<strong>To add narrative:</strong> Edit the <code>summary</code> field on each day object in the DAYS JS array (search for <code>const DAYS=</code>). Edit the <code>note</code> field on individual stop objects within each day. Both the Story tab and Map popups draw from this data.<br><br>
+<strong>To change a location label:</strong> Find the stop in the DAYS array by date + time, update the <code>location</code> field. The same label appears in the Story tab, Map popup, and lightbox caption.<br><br>
+<strong>Versioning rule:</strong> Every meaningful change = bump the version in (1) the About heading, (2) the footer badge, and (3) add a changelog entry. Kyle verifies pushes by checking the footer version after GitHub Pages updates.<br><br>
+<strong>Photo note:</strong> photos.zip contains 181 JPEGs. Kyle extracts into <code>photos/</code> alongside index.html. HEIC files from the original camera roll will NOT render in Chrome &mdash; only the converted JPEGs work.
 </div></div></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><span class="lightbox-close" onclick="closeLightbox()">&times;</span><span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">&#8249;</span><img id="lightbox-img" src="" alt=""><span class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">&#8250;</span><div class="lightbox-caption" id="lightbox-caption"></div></div>
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.1</span></footer>
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.2</span></footer>
 <script>
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
