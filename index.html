@@ -750,7 +750,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <div id="story-section" class="section"><div class="timeline-wrap"><p class="section-heading">The journey, day by day &mdash; tap a card to expand stops, tap a stop to see its photos</p><div id="day-cards"></div></div></div>
 <div id="gallery-section" class="section"><div class="gallery-wrap"><p class="section-heading">Memories, organized by day</p><div id="gallery-grid-wrap"></div></div></div>
 <div id="about-section" class="section"><div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
-<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.2</p>
+<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.0.3</p>
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
 <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map with GPS-plotted stops and photo popups, a day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox. Built as a single HTML file + photos folder for GitHub Pages, shareable by link, AirPlay-friendly on a TV.</p>
 
@@ -772,6 +772,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Changelog</h2>
 <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
+<p style="margin-bottom:10px;"><strong>v1.0.3</strong> &mdash; July 6, 2026<br>Hover tooltips on all photos show filename + date/time/location caption, making missing images identifiable by hovering over the broken image placeholder.</p>
 <p style="margin-bottom:10px;"><strong>v1.0.2</strong> &mdash; July 5, 2026<br>Map markers now open rich DOM-based popups with location, time, note, and scrollable photo strip for that stop&rsquo;s photos (tap any photo to open lightbox). POINTS array updated with day/stop indices (di, si) to power the stop lookup. About tab expanded with full handoff documentation. Version badge present in footer for push verification.</p>
 <p style="margin-bottom:10px;"><strong>v1.0.1</strong> &mdash; July 5, 2026<br>Per-stop photo assignment by EXIF timestamp &mdash; each stop now shows only its own photos, not all day photos. Map starts one zoom level closer after fitBounds. Stop rows individually expandable in Story tab. Version badge added to footer.</p>
 <p style="margin-bottom:10px;"><strong>v1.0.0</strong> &mdash; July 5, 2026<br>Initial build. Map with GPS-plotted stops, story timeline with expandable day cards and dual Kyle/Sarah thumbnails, full gallery with lightbox, About tab. 180 photos across both cameras, all converted from HEIC/JPG to JPEG for universal browser compatibility.</p>
@@ -793,7 +794,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <strong>Photo note:</strong> photos.zip contains 181 JPEGs. Kyle extracts into <code>photos/</code> alongside index.html. HEIC files from the original camera roll will NOT render in Chrome &mdash; only the converted JPEGs work.
 </div></div></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><span class="lightbox-close" onclick="closeLightbox()">&times;</span><span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">&#8249;</span><img id="lightbox-img" src="" alt=""><span class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">&#8250;</span><div class="lightbox-caption" id="lightbox-caption"></div></div>
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.2</span></footer>
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.0.3</span></footer>
 <script>
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
@@ -870,6 +871,8 @@ POINTS.forEach(function(p) {
         var img = document.createElement('img');
         img.src = PHOTO_BASE + fname;
         img.loading = 'lazy';
+        img.alt = fname;
+        img.title = fname + ' \u2014 ' + entry.day.label + ' ' + entry.stop.time + ' \u2014 ' + entry.stop.location;
         img.style.cssText = 'height:80px;width:80px;object-fit:cover;border-radius:5px;flex-shrink:0;cursor:pointer;';
         img.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -902,7 +905,8 @@ DAYS.forEach(function(day,i){
     if(cnt>0){
       photoStrip='<div class="stop-photo-strip" data-day="'+i+'" data-stop="'+si+'">';
       s.photos.forEach(function(fname,fi){
-        photoStrip+='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="" data-idx="'+fi+'">';
+        var cap = fname+' \u2014 '+day.label+' '+s.time+' \u2014 '+s.location;
+        photoStrip+='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="'+fname+'" title="'+cap+'" data-idx="'+fi+'">';
       });
       photoStrip+='</div>';
     } else {
@@ -995,8 +999,9 @@ DAYS.forEach(function(day){
   var grid=document.createElement('div');grid.className='gallery-grid';
   day.allPhotos.forEach(function(fname,idx){
     var cell=document.createElement('div');cell.className='gallery-cell';
-    cell.innerHTML='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="">';
-    cell.addEventListener('click',function(){openLightbox(day.allPhotos,idx,day.label+' — '+day.title);});
+    var gcap = fname+' \u2014 '+day.label+' \u2014 '+day.title;
+    cell.innerHTML='<img src="'+PHOTO_BASE+fname+'" loading="lazy" alt="'+fname+'" title="'+gcap+'">';
+    cell.addEventListener('click',function(){openLightbox(day.allPhotos,idx,day.label+' \u2014 '+day.title);});
     grid.appendChild(cell);
   });
   block.appendChild(grid);galleryWrap.appendChild(block);
