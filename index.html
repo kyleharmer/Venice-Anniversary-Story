@@ -752,7 +752,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 .hero-audio audio{flex:1;height:28px;min-width:0;opacity:0.85;}
 
 /* Hero stats — purposeful portrait wrap */
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:40px;flex-wrap:wrap;}
 .hero-stats-anniversary{display:none;}
 @media(max-width:600px){
   .hero-stats{grid-template-columns:repeat(3,1fr);gap:12px;}
@@ -773,7 +773,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <div id="story-section" class="section"><div class="timeline-wrap"><p class="section-heading">The journey, day by day &mdash; tap a card to expand stops, tap a stop to see its photos</p><div id="day-cards"></div></div></div>
 <div id="gallery-section" class="section"><div class="gallery-wrap"><p class="section-heading">Memories, organized by day</p><div id="gallery-grid-wrap"></div></div></div>
 <div id="about-section" class="section"><div style="max-width:760px;margin:0 auto;padding:48px 24px 80px;font-family:Inter,sans-serif;font-weight:300;color:#1a1714;">
-<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.1.1</p>
+<p style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:32px;">Venice Storyboard &mdash; v1.1.2</p>
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">What this is</h2>
 <p style="font-size:14px;line-height:1.75;margin-bottom:28px;">An interactive travel storyboard for Kyle &amp; Sarah's 20th anniversary trip to Venice, June 18&ndash;25, 2026. Three views: a live map with GPS-plotted stops and photo popups, a day-by-day story timeline with expandable stops and per-stop photo strips, and a full gallery with lightbox. Built as a single HTML file + photos folder for GitHub Pages, shareable by link, AirPlay-friendly on a TV.</p>
 
@@ -795,6 +795,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 
 <h2 style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#8a8178;margin-bottom:12px;">Changelog</h2>
 <div style="font-size:13px;line-height:1.8;border-left:2px solid #e8e4de;padding-left:16px;">
+<p style="margin-bottom:10px;"><strong>v1.1.2</strong> &mdash; July 6, 2026<br>Hero stats switched back to flex with fixed gap on desktop so items sit naturally centered rather than stretched across full width.</p>
 <p style="margin-bottom:10px;"><strong>v1.1.1</strong> &mdash; July 6, 2026<br>Hero stats: 3-up grid on mobile with 20 Years spanning full width as a featured row. Gallery thumbnails smaller on mobile (~90px, 4+ per row). iOS audio fix: added playsinline attribute; Monday card expand pulses the player bar instead of auto-playing (Safari blocks autoplay without direct tap).</p>
 <p style="margin-bottom:10px;"><strong>v1.1.0</strong> &mdash; July 6, 2026<br>Fixed audio filename to 4seasons.mp3 (was 4season.mp3).</p>
 <p style="margin-bottom:10px;"><strong>v1.0.9</strong> &mdash; July 6, 2026<br>Vivaldi Four Seasons audio player moved to hero header — always visible and playable from any tab. Auto-plays when Monday card is expanded in Story. Vivaldi stops show a nudge pointing to the header player. Place 4seasons.mp3 in repo root alongside index.html.</p>
@@ -825,7 +826,7 @@ footer{text-align:center;padding:32px;font-size:11px;color:var(--muted);letter-s
 <strong>Photo note:</strong> photos.zip contains 181 JPEGs. Kyle extracts into <code>photos/</code> alongside index.html. HEIC files from the original camera roll will NOT render in Chrome &mdash; only the converted JPEGs work.
 </div></div></div>
 <div class="lightbox" id="lightbox" onclick="closeLightbox(event)"><span class="lightbox-close" onclick="closeLightbox()">&times;</span><span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1,event)">&#8249;</span><img id="lightbox-img" src="" alt=""><span class="lightbox-nav lightbox-next" onclick="lightboxNav(1,event)">&#8250;</span><div class="lightbox-caption" id="lightbox-caption"></div></div>
-<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.1.1</span></footer>
+<footer>Kyle &amp; Sarah &middot; Venice &middot; June 2026 &middot; A 20th Anniversary &nbsp;&middot;&nbsp; <span style="opacity:0.5">v1.1.2</span></footer>
 <script>
 /* @preserve
  * Leaflet 1.9.4, a JS library for interactive maps. https://leafletjs.com
